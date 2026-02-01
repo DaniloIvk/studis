@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+@config "./../tailwind.config.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+	/* --- 1. Firefox Fallback (Standard CSS) --- */
+	/* Firefox only supports color and width. No arrows, no border-radius. */
+	* {
+		scrollbar-width: thin;
+		/* Thumb Color | Track Color (transparent) */
+		scrollbar-color: #677db7 transparent;
+	}
+
+	/* Dark mode support for Firefox */
+	.dark * {
+		scrollbar-color: #677db7 transparent;
+	}
+
+	/* --- 2. Webkit (Chrome, Edge, Safari, Brave) --- */
+	::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	/* The Thumb (The moving part) */
+	::-webkit-scrollbar-thumb {
+		background-color: #677db7;
+		border-radius: 100%;
+		border: 3px solid transparent;
+		background-clip: content-box;
+	}
+
+	/* Dark mode Thumb */
+	.dark ::-webkit-scrollbar-thumb {
+		background-color: #677db7;
+	}
+
+	/* Hover effect on Thumb */
+	::-webkit-scrollbar-thumb:hover {
+		background-color: #677db7;
+	}
+	.dark ::-webkit-scrollbar-thumb:hover {
+		background-color: #677db7;
+	}
+
+	/* --- 3. The Arrows (Buttons) - Webkit Only --- */
+
+	/* Enable buttons */
+	::-webkit-scrollbar-button {
+		display: block;
+		background-size: 10px;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 12px;
+		height: 12px;
+	}
+
+	/* Vertical Up Arrow */
+	::-webkit-scrollbar-button:vertical:decrement {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/%3E%3C/svg%3E");
+	}
+
+	/* Vertical Down Arrow */
+	::-webkit-scrollbar-button:vertical:increment {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/%3E%3C/svg%3E");
+	}
+
+	/* Horizontal Left Arrow */
+	::-webkit-scrollbar-button:horizontal:decrement {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M15.41 7.41L10.83 12l4.58 4.59L14 18l-6-6 6-6z'/%3E%3C/svg%3E");
+	}
+
+	/* Horizontal Right Arrow */
+	::-webkit-scrollbar-button:horizontal:increment {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'/%3E%3C/svg%3E");
+	}
+
+	/* Dark Mode Arrows (Change fill color to lighter gray) */
+	.dark ::-webkit-scrollbar-button:vertical:decrement,
+	.dark ::-webkit-scrollbar-button:vertical:increment,
+	.dark ::-webkit-scrollbar-button:horizontal:decrement,
+	.dark ::-webkit-scrollbar-button:horizontal:increment {
+		filter: invert(0.8); /* Quick hack to make arrows light in dark mode */
+	}
+}
+
+@layer utilities {
+	/**
+ * Scrollbar
+ */
+	/* Custom utility for WebKit browsers */
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* For IE and Edge (legacy support) */
+	.scrollbar-hide {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox (see below) */
+	}
+
+	.scroll-container {
+		/* Reserved space for scrollbar even when not visible */
+		scrollbar-gutter: stable both-edges;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}

@@ -1,0 +1,67 @@
+{
+	"required": "Polje {{attribute}} je obavezno. Molimo Vas da ga popunite.",
+	"invalid_type": "Format polja {{attribute}} nije ispravan.",
+	"email": "{{attribute, capitalize}} mora biti validna email adresa.",
+	"confirmed": "Morate da potvrdite {{attribute}}. Unete vrednosti se ne podudaraju.",
+	"unique": "{{model, capitalize}} sa ovim {{attribute}} već postoji u sistemu.",
+	"exists": "Izabrani {{attribute}} ne postoji u evidenciji za {{model}}.",
+	"min": {
+		"string": "{{attribute, capitalize}} mora sadržati najmanje {{min}} karaktera.",
+		"numeric": "Vrednost za {{attribute}} ne sme biti manja od {{min}}.",
+		"date": "{{attribute, capitalize}} mora biti nakon {{min}}."
+	},
+	"max": {
+		"string": "{{attribute, capitalize}} ne sme biti duži od {{max}} karaktera.",
+		"numeric": "Vrednost za {{attribute}} ne sme biti veća od {{max}}.",
+		"date": "{{attribute, capitalize}} mora biti pre {{max}}."
+	},
+	"lowercase": "{{attribute, capitalize}} mora da sadrži mala slova.",
+	"lowercase_only": "{{attribute, capitalize}} mora da sadrži samo mala slova.",
+	"uppercase": "{{attribute, capitalize}} mora da sadrži velika slova.",
+	"uppercase_only": "{{attribute, capitalize}} mora da sadrži samo velika slova.",
+	"numeric": "{{attribute, capitalize}} mora da sadrži brojeve.",
+	"numeric_only": "{{attribute, capitalize}} mora da sadrži samo brojeve.",
+	"invalid_string": "{{attribute, capitalize}} nije u pravilnom formatu.",
+	"invalid_format": "{{attribute, capitalize}} nije u pravilnom formatu.",
+	"invalid_file": "{{attribute, capitalize}} mora da bude datoteka.",
+	"invalid_mime_type": "{{attribute, capitalize}} datoteka je pogršnog tipa, dozvoljeni tipovi su {{allowed}}.",
+	"file_too_large": "{{attribute, capitalize}} datoteka je prevelika, maksimalna veličina datoteka je {{max}}.",
+	"attributes": {
+		"index": "broj indeksa",
+		"email": "email adresa",
+		"password": "lozinka",
+		"firstName": "ime",
+		"lastName": "prezime",
+		"phoneNumber": "broj telefona",
+		"title": "naslov",
+		"description": "opis",
+		"name": "naziv",
+		"espb": "ESPB bodovi",
+		"dateFrom": "datum od",
+		"dateTo": "datum do",
+		"grade": "ocena"
+	},
+	"models": {
+		"announcements": "obaveštenje",
+		"course": "predmet",
+		"course_material": "predmetni materijal",
+		"exam_application": "prijava ispita",
+		"exam_period": "ispitni rok",
+		"user": "korisnik"
+	},
+	"overrides": {
+		"email": {
+			"unique": "Već postoji korisnik registrovan sa ovom email adresom."
+		},
+		"dateFrom": {
+			"min": { "date": "Datum početka mora biti posle datuma završetka." },
+			"max": {
+				"date": "Datum početka ne može biti kasniji od datuma završetka."
+			}
+		},
+		"dateTo": {
+			"min": { "date": "Datum završetka mora biti posle datuma početka." },
+			"max": { "date": "Datum završetka ne može biti pre datuma početka." }
+		}
+	}
+}

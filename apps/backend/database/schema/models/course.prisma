@@ -1,0 +1,19 @@
+model Course {
+  id          Int      @id @default(autoincrement())
+  professorId Int?     @map("professor_id")
+  semester    Semester
+  index       String   @unique
+  name        String
+  espb        Float
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  courseMaterials  CourseMaterial[]
+  professor        User?             @relation(fields: [professorId], references: [id])
+  enrollments      Enrollments[]
+  examApplications ExamApplication[]
+
+  @@index([professorId], map: "courses_professor_id_fkey")
+  @@map("courses")
+}

@@ -1,0 +1,13 @@
+model Announcements {
+  id          Int      @id @default(autoincrement())
+  authorId    Int?     @map("author_id")
+  title       String
+  description String   @default("")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  author User? @relation(fields: [authorId], references: [id])
+
+  @@index([authorId], map: "announcements_author_id_fkey")
+  @@map("announcements")
+}

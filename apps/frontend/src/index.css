@@ -1,0 +1,128 @@
+@import './tailwind.css';
+
+/**
+ * Global overrides
+ */
+:root {
+	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.2;
+	font-weight: 400;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	transition: none;
+	transition-delay: 0ms;
+}
+
+html,
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+
+html {
+	width: fit-content;
+	height: fit-content;
+}
+
+html.dark {
+	color-scheme: light dark;
+}
+
+html,
+body {
+	background-color: unset;
+	color: unset;
+	fill: unset;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: stretch;
+	align-items: stretch;
+	place-items: center;
+	min-width: 320px;
+	max-width: 100vw;
+	max-width: 100dvw;
+	min-height: 320px;
+	max-height: 100vh;
+	max-height: 100dvh;
+	width: 100vw;
+	width: 100dvw;
+	height: 100vh;
+	height: 100dvh;
+}
+
+#root {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+button {
+	outline: none;
+}
+button:hover {
+	outline: none;
+}
+button:focus {
+	outline: none;
+}
+
+input {
+	background-color: transparent;
+	line-height: 2.5em;
+	padding: 0 0.75em;
+	margin: 0;
+	outline: none;
+}
+input:hover,
+input:focus {
+	outline: none;
+}
+
+input * {
+	background-color: transparent;
+}
+
+*::selection {
+	background-color: #677db7;
+	color: #fbfef9;
+}
+
+/**
+ * Custom classes
+ */
+
+/**
+ * All child elements and their children inherit the color properties
+ * of their parents
+ */
+.material * {
+	background-color: inherit;
+	color: inherit;
+	fill: inherit;
+	border-color: inherit;
+}
+
+.material svg {
+	background-color: transparent;
+}
+
+/**
+ * All child elements and their children have initially unset color
+ * properties
+ */
+.non-material * {
+	background-color: unset;
+	color: unset;
+	fill: unset;
+	border-color: unset;
+}

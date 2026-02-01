@@ -1,0 +1,43 @@
+{
+	"role": {
+		"NaN": "Izmenite rolu",
+		"ADMIN": "Admin",
+		"PROFESSOR": "Profesor",
+		"STUDENT": "Student"
+	},
+	"semester": {
+		"I": "I (prvi)",
+		"II": "II (drugi)",
+		"III": "III (treći)",
+		"IV": "IV (četvrti)",
+		"V": "V (peti)",
+		"VI": "VI (šesti)",
+		"VII": "VII (sedmi)",
+		"VIII": "VIII (osmi)",
+		"IX": "IX (deveti)",
+		"X": "X (deseti)"
+	},
+	"day_of_week": {
+		"MONDAY": "Ponedeljak",
+		"TUESDAY": "Utorak",
+		"WEDNESDAY": "Sreda",
+		"THURSDAY": "Četvrtak",
+		"FRIDAY": "Petak",
+		"SATURDAY": "Subota",
+		"SUNDAY": "Nedelja"
+	},
+	"month": {
+		"JANUARY": "Januar",
+		"FEBRUARY": "Februar",
+		"MARCH": "Mart",
+		"APRIL": "April",
+		"MAY": "Maj",
+		"JUNE": "Jun",
+		"JULY": "Jul",
+		"AUGUST": "Avgust",
+		"SEPTEMBER": "Septembar",
+		"OCTOBER": "Oktobar",
+		"NOVEMBER": "Novembar",
+		"DECEMBER": "Decembar"
+	}
+}

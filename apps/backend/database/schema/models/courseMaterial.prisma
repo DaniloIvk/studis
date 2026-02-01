@@ -1,0 +1,15 @@
+model CourseMaterial {
+  id          Int      @id @default(autoincrement())
+  courseId    Int      @map("course_id")
+  title       String
+  description String   @default("")
+  filename    String
+  filepath    String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([courseId], map: "course_material_course_id_fkey")
+  @@map("course_material")
+}

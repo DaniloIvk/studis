@@ -1,0 +1,24 @@
+model User {
+  id              Int       @id @default(autoincrement())
+  role            Role      @default(STUDENT)
+  index           String?   @unique
+  email           String    @unique
+  firstName       String    @map("first_name")
+  lastName        String?   @map("last_name")
+  parentName      String?   @map("parent_name")
+  address         String?
+  phoneNumber     String?   @unique @map("phone_number")
+  password        String
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  announcements    Announcements[]
+  code             Code?
+  courses          Course[]
+  enrollments      Enrollments[]
+  examApplications ExamApplication[]
+  tokens           PersonalAccessToken[]
+
+  @@map("users")
+}

@@ -1,0 +1,12 @@
+model Enrollments {
+  id        Int @id @default(autoincrement())
+  studentId Int @map("student_id")
+  courseId  Int @map("course_id")
+
+  course  Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  student User   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([courseId], map: "enrollments_course_id_fkey")
+  @@index([studentId], map: "enrollments_student_id_fkey")
+  @@map("enrollments")
+}

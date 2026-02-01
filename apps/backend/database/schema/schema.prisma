@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma"
+}
+
+generator frontendTypes {
+  provider          = "prisma-generator-typescript-interfaces"
+  output            = "../../../frontend/src/schema/types.ts"
+  enumType          = "enum"
+  enumSuffix        = "Enum"
+  modelType         = "type"
+  relations         = "required"
+  counts            = "required"
+  optionalNullables = false
+  optionalDefaults  = false
+  includeComments   = false
+  prettier          = true
+}
+
+datasource db {
+  // provider = "mysql"
+  provider = "sqlite"
+}
+
+/**
+ * Enums, types
+ */
+
+enum Role {
+  ADMIN
+  PROFESSOR
+  STUDENT
+
+  @@map("role")
+}
+
+enum Semester {
+  I
+  II
+  III
+  IV
+  V
+  VI
+  VII
+  VIII
+  IX
+  X
+
+  @@map("semester")
+}
+
+enum ExamApplicationStatus {
+  APPLIED
+  PASSED
+  FAILED
+
+  @@map("exam_application_status")
+}

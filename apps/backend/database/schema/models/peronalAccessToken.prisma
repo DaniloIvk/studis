@@ -1,0 +1,14 @@
+model PersonalAccessToken {
+  id         Int       @id @default(autoincrement())
+  userId     Int       @map("user_id")
+  token      String    @unique
+  lastUsedAt DateTime  @default(now()) @map("last_used_at")
+  expiresAt  DateTime? @map("expires_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "personal_access_tokens_user_id_fkey")
+  @@map("personal_access_tokens")
+}

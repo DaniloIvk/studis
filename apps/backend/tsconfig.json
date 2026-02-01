@@ -1,0 +1,67 @@
+{
+  "compilerOptions": {
+    /* -------------------------------------------------------------------------- */
+    /* Project Basics                              */
+    /* -------------------------------------------------------------------------- */
+    "baseUrl": ".",
+    "target": "esnext",
+    "lib": [
+      "esnext"
+    ],
+    "types": [
+      "next"
+    ],
+    /* -------------------------------------------------------------------------- */
+    /* Modules & Resolution                            */
+    /* -------------------------------------------------------------------------- */
+    // Changed from "nodenext" to "esnext" to allow imports without file extensions
+    "module": "esnext",
+    // "node" resolution strategy allows finding files without specifying .js or .ts
+    "moduleResolution": "bundler",
+    // Interop helpers for working with CommonJS modules
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleDetection": "force",
+    // Modern bundler/runtime compatibility
+    "verbatimModuleSyntax": false,
+    "isolatedModules": true,
+    /* -------------------------------------------------------------------------- */
+    /* Strictness & Safety                            */
+    /* -------------------------------------------------------------------------- */
+    "strict": true,
+    // Best practice: prevents accessing array[100] without checking undefined
+    "noUncheckedIndexedAccess": true,
+    // Ensures you don't pass 'undefined' to optional properties unless explicitly allowed
+    "exactOptionalPropertyTypes": true,
+    // Code quality checks
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noUncheckedSideEffectImports": true,
+    /* -------------------------------------------------------------------------- */
+    /* Output                                   */
+    /* -------------------------------------------------------------------------- */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    // "outDir": "./dist", // Uncomment if compiling to a specific folder
+    // "rootDir": "./src", // Uncomment if you want to lock sources to src
+    /* -------------------------------------------------------------------------- */
+    /* Misc                                    */
+    /* -------------------------------------------------------------------------- */
+    "skipLibCheck": true, // Speeds up compilation by skipping types in node_modules
+    "jsx": "react-jsx" // Only needed if using JSX/React in this backend project
+  },
+  "include": [
+    "bootstrap/**/*",
+    "app/**/*",
+    "config/**/*",
+    "database/**/*",
+    "routes/**/*",
+    "index.ts",
+  ],
+  "paths": {
+    "@studis/common": [
+      "../../packages/common/index.ts"
+    ]
+  }
+}

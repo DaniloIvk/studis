@@ -1,0 +1,20 @@
+model ExamApplication {
+  id           Int                   @id @default(autoincrement())
+  examPeriodId Int                   @map("exam_period_id")
+  courseId     Int                   @map("course_id")
+  studentId    Int                   @map("student_id")
+  status       ExamApplicationStatus @default(APPLIED)
+  grade        Float?
+  gradedAt     DateTime?             @map("graded_at")
+  createdAt    DateTime              @default(now()) @map("created_at")
+  updatedAt    DateTime              @updatedAt @map("updated_at")
+
+  course     Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  examPeriod ExamPeriod @relation(fields: [examPeriodId], references: [id], onDelete: Cascade)
+  student    User       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([courseId], map: "exam_applications_course_id_fkey")
+  @@index([examPeriodId], map: "exam_applications_exam_period_id_fkey")
+  @@index([studentId], map: "exam_applications_student_id_fkey")
+  @@map("exam_applications")
+}

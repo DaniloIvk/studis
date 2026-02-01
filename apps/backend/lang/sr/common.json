@@ -1,0 +1,34 @@
+{
+  "responses": {
+    "announcement": {
+      "created": "Uspešno ste dodali novo obaveštenje.",
+      "updated": "Uspešno ste ažurirali obaveštenje.",
+      "deleted": "Uspešno ste uklonili obaveštenje."
+    },
+    "course": {
+      "created": "Uspešno ste dodali novi predmet.",
+      "updated": "Uspešno ste ažurirali predmet.",
+      "deleted": "Uspešno ste uklonili predmet."
+    },
+    "course_material": {
+      "created": "Uspešno ste dodali novi predmetni materijal.",
+      "updated": "Uspešno ste ažurirali predmetni materijal.",
+      "deleted": "Uspešno ste uklonili predmetni materijal."
+    },
+    "exam_application": {
+      "created": "Uspešno ste prijavili ispti.",
+      "updated": "Uspešno ste ažurirali prijavu ispita.",
+      "deleted": "Uspešno ste otkazli prijavu ispita."
+    },
+    "exam_period": {
+      "created": "Uspešno ste dodali novi ispitni rok.",
+      "updated": "Uspešno ste ažurirali ispitni rok.",
+      "deleted": "Uspešno ste uklonili ispitni rok."
+    },
+    "user": {
+      "created": "Uspešno ste dodali novog korisnika.",
+      "updated": "Uspešno ste ažurirali korisnika.",
+      "deleted": "Uspešno ste uklonili korisnika."
+    }
+  }
+}

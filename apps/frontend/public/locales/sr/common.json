@@ -1,0 +1,133 @@
+{
+	"": "",
+	"404_message": "Stranica nije pronađena",
+	"back_to_homepage": "Nazad na početnu stranicu",
+	"email": "Email",
+	"password": "Lozinka",
+	"login": "Prijavite se",
+	"dashboard": "Kontrolna tabla",
+	"users": "Korisnici",
+	"courses": "Predmeti",
+	"exams": "Ispiti",
+	"exam_periods": "Ispitni rokovi",
+	"grades": "Ocene",
+	"materials": "Predmetni materijali",
+	"announcement": "Obaveštenja",
+	"my_profile": "Moj profil",
+	"about_us": "O nama",
+	"theme": "Tema",
+	"actions": "Akcije",
+	"add": "Dodajte",
+	"edit": "Izmenite",
+	"update": "Ažurirajte",
+	"remove": "Uklonite",
+	"yes": "Da",
+	"no": "Ne",
+	"search": "Pretraga",
+	"no_search_results": "Nema podataka za prikaz.",
+	"date_from": "Datum od",
+	"date_to": "Datum do",
+	"buttons": {
+		"create_user": "Dodajte korisnika",
+		"update_user": "Ažurirajte korisnika",
+		"create_course": "Dodajte predmet",
+		"update_course": "Ažurirajte predmet",
+		"create_course_material": "Dodajte predmetni materijal",
+		"update_course_material": "Ažurirajte predmetni materijal",
+		"create_exam_period": "Dodajte ispitni rok",
+		"update_exam_period": "Ažurirajte ispitni rok",
+		"create_exam_application": "Dodajte prijavu ispita",
+		"update_exam_application": "Ažurirajte prijavu ispita",
+		"create_announcement": "Dodajte obaveštenje",
+		"update_announcement": "Ažurirajte obaveštenje",
+		"go_to_page": "Idite na stranicu",
+		"search": "Pretražite",
+		"submit": "Pošaljite",
+		"reset": "Resetujte"
+	},
+	"form": {
+		"select_option": "Odaberite opciju",
+		"select_options": "Odaberite opcije",
+		"upload_a_file": "Otpremite datoteku",
+		"upload_files": "Otpremite datoteke",
+		"select_date": "Izaberite datum",
+		"select_month": "Izaberite mesec",
+		"select_year": "Izaberite godinu"
+	},
+	"models": {
+		"id": "ID",
+		"index": "indeks",
+		"role": "rola",
+		"name": "ime",
+		"title": "naslov",
+		"first_name": "ime",
+		"last_name": "prezime",
+		"parent_name": "ime roditelja",
+		"email": "email adresa",
+		"address": "adresa",
+		"phone_number": "broj telefona",
+		"password": "lozinka",
+		"professor": "profesor",
+		"semester": "semestar",
+		"course": "predmet",
+		"espb": "ESPB",
+		"file": "fajl",
+		"description": "opis",
+		"password_confirmation": "potvrda lozinke",
+		"date_from": "datum od",
+		"date_to": "datum do",
+		"published_at": "vreme objave",
+		"created_at": "vreme kreiranja",
+		"updated_at": "vreme ažuriranja"
+	},
+	"modals": {
+		"create_user": "Novi korisnika",
+		"update_user": "Ažuriranje korisnika",
+		"create_course": "Novi predmet",
+		"update_course": "Ažuriranje predmet",
+		"create_course_material": "Novi predmetni materijal",
+		"update_course_material": "Ažuriranje predmetni materijal",
+		"create_exam_period": "Novi ispitni rok",
+		"update_exam_period": "Ažuriranje ispitnog roka",
+		"create_exam_application": "Nova prijava ispita",
+		"update_exam_application": "Ažuriranje prijavu ispita",
+		"create_announcement": "Novo obaveštenje",
+		"update_announcement": "Ažuriranje obaveštenje"
+	},
+	"popups": {
+		"announcement": {
+			"update_title": "Ažurirajte obaveštenje?",
+			"delete_title": "Uklonite obaveštenje?"
+		},
+		"user": {
+			"update_title": "Ažurirajte korisnika?",
+			"delete_title": "Uklonite korisnika?",
+			"delete_description": "Ova radnja je nepovratna."
+		},
+		"course": {
+			"update_title": "Ažurirajte predment?",
+			"delete_title": "Uklonite predmet?",
+			"delete_description": "Ova radnja je nepovratna."
+		},
+		"course_material": {
+			"update_title": "Ažurirajte predmetni materijal?",
+			"delete_title": "Uklonite predmetni materilal?",
+			"delete_description": "Ova radnja je nepovratna."
+		},
+		"enrollments": {
+			"update_title": "Ažurirajte upis na predmet?",
+			"delete_title": "Uklonite upis na predmet?",
+			"delete_description": "Ova radnja je nepovratna."
+		},
+		"exam_application": {
+			"update_title": "Ažurirajte prijavu ispita?",
+			"delete_title": "Otkažite prijavu ispita?",
+			"delete_description": "Ova radnja je nepovratna."
+		},
+		"exam_period": {
+			"update_title": "Ažurirajte prijavni rok?",
+			"delete_title": "Uklonite prijavni rok?",
+			"delete_description": "Ova radnja je nepovratna."
+		}
+	}
+}

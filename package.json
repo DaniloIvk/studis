@@ -1,0 +1,22 @@
+{
+	"name": "studis",
+	"version": "1.0.0",
+	"description": "Academy portal for students and professors",
+	"license": "ISC",
+	"author": "",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"dev:backend": "npm run dev -w apps/backend",
+		"dev:frontend": "npm run dev -w apps/frontend",
+		"dev": "concurrently -n \"BE,FE\" -c \"blue.bold,green.bold\" \"npm run dev:backend\" \"npm run dev:frontend\"",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"concurrently": "^9.2.1"
+	},
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	]
+}
