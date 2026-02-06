@@ -16,8 +16,13 @@ import { zodI18nErrorMap, zodI18nResources } from '@studis/common';
 import corsPolicy from '../app/http/middleware/corsPolicy';
 import storageConfig from '../config/storage';
 import i18nextConfig from 'config/i18next';
+import { requestContext } from 'app/core/helpers/currentUser';
 
 const app: express.Express = express();
+
+app.use((req, res, next) => {
+  requestContext.run(req, () => next());
+});
 
 /**
  * Global middleware

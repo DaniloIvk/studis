@@ -26,23 +26,27 @@ class ExamController extends Controller {
    * GET /api/exams/:id
    * Get single exam
    */
-  public async show({ request, response }: ControllerContract) {
-    const examId = Number(request.params.id);
-    
-    const exam = await database.exam.findUnique({
-      where: { id: examId },
-      include: {
-        createdBy: true,
-        course: true
-      }
-    });
-
-    if (!exam) {
-      return response.status(404).json({ error: 'Exam not found' });
-    }
-
-    response.json({ data: ExamResource.make(exam) });
+public async show({ request, response }: ControllerContract) {
+  const examId = Number(request.params.id || request.params.exam);
+  
+  if (!examId || isNaN(examId)) {
+    return response.status(400).json({ error: 'Invalid exam ID' });
   }
+  
+  const exam = await database.exam.findUnique({
+    where: { id: examId },
+    include: {
+      createdBy: true,
+      course: true
+    }
+  });
+
+  if (!exam) {
+    return response.status(404).json({ error: 'Exam not found' });
+  }
+
+  response.json({ data: ExamResource.make(exam) });
+}
 
   /**
    * POST /api/exams
@@ -77,52 +81,61 @@ public async store({ request, response }: ControllerContract) {
    * Update exam
    */
   public async update({ request, response }: ControllerContract) {
-    const examId = Number(request.params.id);
-    const examRequest = await UpdateExamRequest.validate();
-    const validated = examRequest.validated() as UpdateExamData;
-
-    const updateData: {
-      courseId?: number;
-      title?: string;
-      description?: string;
-      date?: Date;
-    } = {};
-    
-    if (validated.courseId !== undefined) updateData.courseId = validated.courseId;
-    if (validated.title !== undefined) updateData.title = validated.title;
-    if (validated.description !== undefined) updateData.description = validated.description;
-    if (validated.date !== undefined) updateData.date = validated.date;
-
-    const updatedExam = await database.exam.update({
-      where: { id: examId },
-      data: updateData,
-      include: {
-        createdBy: true,
-        course: true
-      }
-    });
-
-    response.json({
-      message: examRequest.t('common:responses.exam.updated'),
-      data: ExamResource.make(updatedExam)
-    });
+  const examId = Number(request.params.id || request.params.exam);
+  
+  if (!examId || isNaN(examId)) {
+    return response.status(400).json({ error: 'Invalid exam ID' });
   }
+
+  const examRequest = await UpdateExamRequest.validate();
+  const validated = examRequest.validated() as UpdateExamData;
+
+  const updateData: Partial<{
+    courseId: number;
+    title: string;
+    description: string;
+    date: Date;
+  }> = {};
+  
+  if (validated.courseId !== undefined) updateData.courseId = validated.courseId;
+  if (validated.title !== undefined) updateData.title = validated.title;
+  if (validated.description !== undefined) updateData.description = validated.description;
+  if (validated.date !== undefined) updateData.date = validated.date;
+
+  const updatedExam = await database.exam.update({
+    where: { id: examId },
+    data: updateData,
+    include: {
+      createdBy: true,
+      course: true
+    }
+  });
+
+  response.json({
+    message: examRequest.t('common:responses.exam.updated'),
+    data: ExamResource.make(updatedExam)
+  });
+}
 
   /**
    * DELETE /api/exams/:id
    * Delete exam
    */
-  public async destroy({ request, response }: ControllerContract) {
-    const examId = Number(request.params.id);
-
-    await database.exam.delete({ 
-      where: { id: examId } 
-    });
-
-    response.json({
-      message: request.t('common:responses.exam.deleted')
-    });
+public async destroy({ request, response }: ControllerContract) {
+  const examId = Number(request.params.id || request.params.exam);
+  
+  if (!examId || isNaN(examId)) {
+    return response.status(400).json({ error: 'Invalid exam ID' });
   }
+
+  await database.exam.delete({ 
+    where: { id: examId } 
+  });
+
+  response.json({
+    message: request.t('common:responses.exam.deleted')
+  });
+}
 }
 
 export default ExamController;

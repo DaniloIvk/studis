@@ -5,6 +5,7 @@ import UpdateGradeRequest from '../../requests/grade/CreateGradeRequest';
 import GradeResource from '../../resources/GradeResource';
 import { currentUser } from '../../../core/helpers/currentUser';
 import { CreateGradeData, UpdateGradeData } from '../../requests/grade/types';
+import { error } from 'console';
 
 
 class GradeController extends Controller {
@@ -50,13 +51,13 @@ class GradeController extends Controller {
    * Get single grade
    */
   public async show({ request, response }: ControllerContract) {
-    const user = currentUser();
-    const gradeId = Number(request.params.id);
-
-    if (!user) {
-      return response.status(401).json({ error: 'Authentication required' });
+    const user = currentUser()
+    const gradeId = Number(request.params.id || request.params.grade);
+    
+    if (!gradeId || isNaN(gradeId)) {
+      return response.status(400).json({ error: 'Invalid grade ID' });
     }
-
+    
     const grade = await database.grade.findUnique({
       where: { id: gradeId },
       include: {
@@ -74,8 +75,11 @@ class GradeController extends Controller {
       return response.status(404).json({ error: 'Grade not found' });
     }
 
+    response.json({ data: GradeResource.make(grade) });
+
+
     // Students can only see their own grades
-    if (user.role === 'STUDENT' && grade.studentId !== user.id) {
+    if (user!.role === 'STUDENT' && grade.studentId !== user!.id) {
       return response.status(403).json({ error: 'Access denied' });
     }
 
@@ -83,81 +87,103 @@ class GradeController extends Controller {
   }
 
   /**
-   * POST /api/grades
-   * Create new grade (professors and admins only)
-   */
-  public async store({ request, response }: ControllerContract) {
-    const gradeRequest = await CreateGradeRequest.validate();
-    const validated = gradeRequest.validated() as CreateGradeData;
+ * POST /api/grades
+ * Create new grade (professors and admins only)
+ */
+public async store({ request, response }: ControllerContract) {
+  const user = currentUser();
+  response.header('x-debug-user', String(user));
+  
 
-    const grade = await database.grade.create({
-      data: {
-        studentId: validated.studentId,
-        examId: validated.examId,
-        value: validated.value,
-        createdById: validated.createdById ?? null
-      },
-      include: {
-        student: true,
-        exam: {
-          include: {
-            course: true
-          }
-        },
-        createdBy: true
-      }
-    });
-
-    response.json({
-      message: gradeRequest.t('common:responses.grade.created'),
-      data: GradeResource.make(grade)
+  // Check authorization
+  if (!user) {
+    return response.status(401).json({ 
+      error: 'Authentication required',
+      debugUser: user
     });
   }
+
+
+  const gradeRequest = await CreateGradeRequest.validate();
+  const validated = gradeRequest.validated() as CreateGradeData;
+
+  const grade = await database.grade.create({
+    data: {
+      studentId: validated.studentId,
+      examId: validated.examId,
+      value: validated.value,
+      createdById: validated.createdById ?? null
+    },
+    include: {
+      student: true,
+      exam: {
+        include: {
+          course: true
+        }
+      },
+      createdBy: true
+    }
+  });
+
+  response.json({
+    message: gradeRequest.t('common:responses.grade.created'),
+    data: GradeResource.make(grade)
+  });
+}
 
   /**
    * PATCH /api/grades/:id
    * Update grade
    */
-  public async update({ request, response }: ControllerContract) {
-    const gradeId = Number(request.params.id);
-    const gradeRequest = await UpdateGradeRequest.validate();
-    const validated = gradeRequest.validated() as UpdateGradeData;
-
-    const updatedGrade = await database.grade.update({
-      where: { id: gradeId },
-      data: {
-        value: validated.value
-      },
-      include: {
-        student: true,
-        exam: {
-          include: {
-            course: true
-          }
-        },
-        createdBy: true
-      }
-    });
-
-    response.json({
-      message: gradeRequest.t('common:responses.grade.updated'),
-      data: GradeResource.make(updatedGrade)
-    });
+public async update({ request, response }: ControllerContract) {
+  const gradeId = Number(request.params.id || request.params.grade);
+  
+  if (!gradeId || isNaN(gradeId)) {
+    return response.status(400).json({ error: 'Invalid grade ID' });
   }
+
+  const gradeRequest = await UpdateGradeRequest.validate();
+  const validated = gradeRequest.validated() as UpdateGradeData;
+
+  const updatedGrade = await database.grade.update({
+    where: { id: gradeId },
+    data: {
+      value: validated.value
+    },
+    include: {
+      student: true,
+      exam: {
+        include: {
+          course: true
+        }
+      },
+      createdBy: true
+    }
+  });
+
+  response.json({
+    message: gradeRequest.t('common:responses.grade.updated'),
+    data: GradeResource.make(updatedGrade)
+  });
+}
 
   /**
    * DELETE /api/grades/:id
    * Delete grade
    */
   public async destroy({ request, response }: ControllerContract) {
-    const gradeId = Number(request.params.id);
+    const gradeId = Number(request.params.id || request.params.grade);
+
+    if(!gradeId || isNaN(gradeId)){
+      return response.status(400).json({error: "Invalid grade ID"})
+    }
 
     await database.grade.delete({ 
       where: { id: gradeId } 
     });
 
     response.json({
-      message: request.t('common:responses.grade.deleted')
+      message: request.t('common:responses.grade.deleted'),
     });
   }
 }
