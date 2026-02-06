@@ -10,6 +10,10 @@ import Router from '../app/core/routing/Router';
 import database from '../app/core/database/database';
 import multer from 'multer';
 import multerConfig from '../config/multer';
+import authController from '../app/http/controllers/auth/AuthController';
+import examController from '../app/http/controllers/exam/ExamController';
+import gradeController from '../app/http/controllers/grade/GradeController';
+import { authMiddleware, professorOrAdminMiddleware } from '../app/http/middleware/auth';
 
 const apiRouter = new Router();
 
@@ -42,5 +46,20 @@ apiRouter.apiResource('/exam-periods', ExamPeriodController, {
 
 apiRouter.get('/users/all', [UserController, 'getAll']);
 apiRouter.apiResource('/users', UserController, { resolveIdAs: database.user });
+
+apiRouter.post('/auth/login', [authController, 'login']);
+apiRouter.post('/auth/logout', [authController, 'logout']);
+apiRouter.get('/auth/me', [authController, 'me']);
+apiRouter.patch('/auth/me', [authController, 'updateProfile']);
+
+// Exam routes - using apiResource (recommended)
+apiRouter.apiResource('/exams', examController, {
+	resolveIdAs: database.exam,
+});
+
+// Grade routes - using apiResource (recommended)
+apiRouter.apiResource('/grades', gradeController, {
+	resolveIdAs: database.grade,
+});
 
 export default apiRouter.getRouter();

@@ -58,6 +58,7 @@ export type Course = {
   professor?: User | null;
   enrollments?: Enrollments[];
   examApplications?: ExamApplication[];
+  exams?: Exam[];
 };
 
 export type CourseMaterial = {
@@ -78,6 +79,20 @@ export type Enrollments = {
   courseId: number;
   course?: Course;
   student?: User;
+};
+
+export type Exam = {
+  id: number;
+  courseId: number;
+  title: string;
+  description: string;
+  date: Date;
+  createdById: number | null;
+  createdAt: Date;
+  updatedAt: Date;
+  course?: Course;
+  createdBy?: User | null;
+  grades?: Grade[];
 };
 
 export type ExamApplication = {
@@ -103,6 +118,19 @@ export type ExamPeriod = {
   createdAt: Date;
   updatedAt: Date;
   examApplications?: ExamApplication[];
+};
+
+export type Grade = {
+  id: number;
+  studentId: number;
+  examId: number;
+  value: number;
+  createdById: number | null;
+  createdAt: Date;
+  updatedAt: Date;
+  student?: User;
+  exam?: Exam;
+  createdBy?: User | null;
 };
 
 export type PersonalAccessToken = {
@@ -136,4 +164,7 @@ export type User = {
   enrollments?: Enrollments[];
   examApplications?: ExamApplication[];
   tokens?: PersonalAccessToken[];
+  examsCreated?: Exam[];
+  gradesCreated?: Grade[];
+  gradesReceived?: Grade[];
 };

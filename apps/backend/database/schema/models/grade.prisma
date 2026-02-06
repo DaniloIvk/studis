@@ -1,0 +1,19 @@
+model Grade {
+  id          Int      @id @default(autoincrement())
+  studentId   Int      @map("student_id")
+  examId      Int      @map("exam_id")
+  value       Float
+  createdById Int?     @map("created_by_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  student     User     @relation("StudentGrades", fields: [studentId], references: [id], onDelete: Cascade)
+  exam        Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  createdBy   User?    @relation("GradeCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([studentId, examId])
+  @@index([studentId], map: "grades_student_id_fkey")
+  @@index([examId], map: "grades_exam_id_fkey")
+  @@index([createdById], map: "grades_created_by_id_fkey")
+  @@map("grades")
+}

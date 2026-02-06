@@ -19,6 +19,9 @@ model User {
   enrollments      Enrollments[]
   examApplications ExamApplication[]
   tokens           PersonalAccessToken[]
+  examsCreated       Exam[]         @relation("ExamCreatedBy")
+  gradesCreated      Grade[]        @relation("GradeCreatedBy")
+  gradesReceived     Grade[]        @relation("StudentGrades")
 
   @@map("users")
 }

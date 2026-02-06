@@ -13,6 +13,7 @@ model Course {
   professor        User?             @relation(fields: [professorId], references: [id])
   enrollments      Enrollments[]
   examApplications ExamApplication[]
+  exams              Exam[]
 
   @@index([professorId], map: "courses_professor_id_fkey")
   @@map("courses")
