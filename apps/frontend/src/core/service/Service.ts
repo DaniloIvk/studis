@@ -23,7 +23,12 @@ abstract class Service {
 			: body instanceof FormData ? body
 			: JSON.stringify(body ?? {});
 
-		const request = new Request(url, { method, headers, body });
+		const request = new Request(url, { 
+			method,
+			headers,
+			body,
+			credentials: 'include'
+		 });
 
 		return await fetch(request)
 			.then((response: Response) => {

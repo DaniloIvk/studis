@@ -9,6 +9,7 @@ import PopupProvider from './components/context/PopupProvider';
 import LoadingProvider from './components/context/LoadingProvider';
 import QueryProvider from './components/context/QueryProvider';
 import ZodProvider from './components/context/ZodProvider';
+import { AuthProvider } from './core/context/AuthContext';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
@@ -18,7 +19,9 @@ createRoot(document.getElementById('root')!).render(
 					<ZodProvider>
 						<LoadingProvider>
 							<PopupProvider>
-								<App />
+								<AuthProvider>
+									<App />
+								</AuthProvider>
 							</PopupProvider>
 						</LoadingProvider>
 					</ZodProvider>
