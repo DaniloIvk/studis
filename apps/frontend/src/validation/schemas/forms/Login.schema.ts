@@ -9,7 +9,7 @@ const LoginSchema = z
 		z
 			.object({
 				email: z.email().min(6).max(320).readonly(),
-				password: z.string().min(8).max(128).readonly(),
+				password: z.string().min(6).max(128).readonly(),
 			})
 			.partial()
 			.readonly(),

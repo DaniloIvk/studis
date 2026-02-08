@@ -5,6 +5,7 @@
 	"email": "Email",
 	"password": "Lozinka",
 	"login": "Prijavite se",
+	"logout": "Odjavite se",
 	"dashboard": "Kontrolna tabla",
 	"users": "Korisnici",
 	"courses": "Predmeti",
@@ -43,7 +44,8 @@
 		"go_to_page": "Idite na stranicu",
 		"search": "Pretražite",
 		"submit": "Pošaljite",
-		"reset": "Resetujte"
+		"reset": "Resetujte",
+		"logout": "Odjavite se"
 	},
 	"form": {
 		"select_option": "Odaberite opciju",

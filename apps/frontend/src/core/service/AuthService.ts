@@ -30,7 +30,7 @@ class AuthService extends Service {
 
     async login(credentials: LoginCredentials): Promise<User> {
         const response = await this.fetch<Response>(
-            `${this.apiUrl}auth/login`,
+            `${this.apiUrl}api/auth/login`,
             'POST',
             undefined,
             credentials,
@@ -51,7 +51,7 @@ class AuthService extends Service {
 
     async logout(): Promise<void> {
         const response = await this.fetch<Response> (
-            `${this.apiUrl}auth/logout`,
+            `${this.apiUrl}api/auth/logout`,
             'POST',
             undefined,
             null,
@@ -69,7 +69,7 @@ class AuthService extends Service {
     async getCurrentUser(): Promise<User | null> {
         try {
             const response = await this.fetch<Response>(
-                `${this.apiUrl}/auth/me`,
+                `${this.apiUrl}api/auth/me`,
                 'GET',
                 undefined,
                 undefined,
@@ -96,7 +96,7 @@ class AuthService extends Service {
 
     async updateProfileData(data: UpdateProfileData): Promise<User> {
         const response = await this.fetch<Response>(
-            `${this.apiUrl}/auth/me`,
+            `${this.apiUrl}api/auth/me`,
             'PATCH',
             undefined,
             data,

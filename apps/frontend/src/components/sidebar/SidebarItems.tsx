@@ -8,6 +8,8 @@ import {
 import SidebarDropdown from './SidebarDropdown';
 import SidebarButton from './SidebarItem';
 import SidebarLabel from './SidebarLabel';
+import { useAuth } from '../../core/context/AuthContext';
+import Role from '../../enums/Role';
 
 interface SidebarListProps {
 	items: SidebarItem[];
@@ -15,15 +17,31 @@ interface SidebarListProps {
 }
 
 function SidebarItems({ items, className = '' }: SidebarListProps) {
+	const { user } = useAuth();
+
 	if (!items || items.length === 0) {
 		return null;
 	}
+
+	const filteredItems = items.filter((item) => {
+		if (!item.role) return true;
+
+		if (!user?.role) return false;
+
+		if (Array.isArray(item.role)) {
+			return item.role.some(role => String(role) === user.role);
+		}
+
+		if (item.role === Role.cases) return true;
+
+		return String(item.role) === user.role;
+	});
 
 	return (
 		<div
 			className={concat('w-full flex flex-col gap-1 scrollbar-hide', className)}
 		>
-			{items.map((item, index) => {
+			{filteredItems.map((item, index) => {
 				switch (true) {
 					case isSidebarLabel(item):
 						return (

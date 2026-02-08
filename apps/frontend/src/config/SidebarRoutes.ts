@@ -7,42 +7,46 @@ import CourseMaterial from '../pages/CourseMaterial';
 import Users from '../pages/Users';
 import ExamPeriods from '../pages/ExamPeriods';
 import Announcement from '../pages/Announcement';
+import MyProfile from '../pages/MyProfile';
+import Exams from '../pages/Exams';
+import Grades from '../pages/Grades';
+import Dashboard from '../pages/Dashboard';
 
 const SidebarRoutes: SidebarItem[] = [
 	{
 		path: 'dashboard',
 		label: 'dashboard',
 		icon: Icons.Dashboard,
-		role: Role.cases,
-		component: AboutUs,
+		role: Role.cases, // Available to all roles
+		component: Dashboard,
 	},
 	{
 		path: 'my-profile',
 		label: 'my_profile',
 		icon: Icons.PersonBook,
-		role: Role.cases,
-		component: AboutUs,
+		role: Role.cases, // Available to all roles
+		component: MyProfile,
 	},
 	{
 		path: 'users',
 		label: 'users',
 		icon: Icons.PersonBook,
-		role: Role.cases,
+		role: Role.ADMIN, // Only admin
 		component: Users,
 	},
 	{
 		path: 'courses',
 		label: 'courses',
 		icon: Icons.Book,
-		role: Role.cases,
+		role: Role.cases, // Available to all
 		component: Courses,
 	},
 	{
 		path: 'exams',
 		label: 'exams',
 		icon: Icons.Assignment,
-		role: Role.cases,
-		component: AboutUs,
+		role: Role.cases, // Available to all
+		component: Exams,
 	},
 	{
 		path: 'exam-periods',
@@ -55,8 +59,8 @@ const SidebarRoutes: SidebarItem[] = [
 		path: 'grades',
 		label: 'grades',
 		icon: Icons.Grading,
-		role: Role.cases,
-		component: AboutUs,
+		role: Role.cases, // Available to all
+		component: Grades,
 	},
 	{
 		path: 'materials',

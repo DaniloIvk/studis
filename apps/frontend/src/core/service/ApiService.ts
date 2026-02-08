@@ -30,14 +30,14 @@ abstract class ApiService<T extends Record<string, any>> extends Service {
 		);
 	}
 
-	public async getAll(query?: Query): Promise<PaginatorData<Partial<T>>> {
+	public async getAll(query?: Query): Promise<PaginatorData<T>> {
 		const response = await this.fetch(
 			this.childConstructor.basePath,
 			'GET',
 			query,
 		);
 
-		return response as Promise<PaginatorData<Partial<T>>>;
+		return response as Promise<PaginatorData<T>>;
 	}
 
 	public async getOne(
@@ -48,7 +48,7 @@ abstract class ApiService<T extends Record<string, any>> extends Service {
 			'GET',
 		);
 
-		return response as GetOneResponse<Partial<T>>;
+		return response as GetOneResponse<T>;
 	}
 
 	public async create(data: Partial<T>): Promise<CreateResponse<Partial<T>>> {
@@ -59,7 +59,7 @@ abstract class ApiService<T extends Record<string, any>> extends Service {
 			data,
 		);
 
-		return response as CreateResponse<Partial<T>>;
+		return response as CreateResponse<T>;
 	}
 
 	public async update(

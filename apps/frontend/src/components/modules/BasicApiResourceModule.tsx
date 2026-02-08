@@ -18,6 +18,9 @@ function BasicApiResourceModule<Model extends ItemProps>({
 	tableColumns,
 	searchFields,
 	translations,
+	hideActions = false, 
+	hideAddButton = false,
+	readOnly = false,
 }: BasicApiResourceModuleProps<Model>) {
 	const { setLoading } = useLoading();
 	const createFormReference = useRef<ForwardedFormProps>(null);
@@ -122,36 +125,40 @@ function BasicApiResourceModule<Model extends ItemProps>({
 				data={data}
 				columns={tableColumns}
 				filters={searchFields}
-				onEditAction={handleEdit}
-				onRemoveAction={confirmDelete.ask}
-				onAdd={handleAdd}
+				onEditAction={!hideActions ? handleEdit : undefined} 
+				onRemoveAction={!hideActions ? confirmDelete.ask : undefined} 
+				onAdd={!hideAddButton ? handleAdd : undefined} 
 				showRowNumbers
 				showPaginator
-				showActions
+				showActions={!hideActions}
 			/>
-			<ModalForm
-				ref={createFormReference}
-				submitButtonText={translations.createModalSubmitLabel}
-				onSubmit={handleCreate}
-				hidden={hideCreateModal}
-				setHidden={setHideCreateModal}
-				title={translations.createModalTitle}
-				{...formConfig}
-				showSubmit
-			/>
-			<ModalForm
-				ref={updateFormReference}
-				defaultValues={itemData}
-				submitButtonText={translations.updateModalSubmitLabel}
-				onSubmit={confirmUpdate.ask}
-				hidden={hideUpdateModal}
-				setHidden={setHideUpdateModal}
-				title={translations.updateModalTitle}
-				{...formConfig}
-				showSubmit
-			/>
-			{confirmUpdate.Component}
-			{confirmDelete.Component}
+			{!readOnly && ( 
+				<>
+					<ModalForm
+						ref={createFormReference}
+						submitButtonText={translations.createModalSubmitLabel}
+						onSubmit={handleCreate}
+						hidden={hideCreateModal}
+						setHidden={setHideCreateModal}
+						title={translations.createModalTitle}
+						{...formConfig}
+						showSubmit
+					/>
+					<ModalForm
+						ref={updateFormReference}
+						defaultValues={itemData}
+						submitButtonText={translations.updateModalSubmitLabel}
+						onSubmit={confirmUpdate.ask}
+						hidden={hideUpdateModal}
+						setHidden={setHideUpdateModal}
+						title={translations.updateModalTitle}
+						{...formConfig}
+						showSubmit
+					/>
+					{confirmUpdate.Component}
+					{confirmDelete.Component}
+				</>
+			)}
 		</div>
 	);
 }
