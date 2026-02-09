@@ -2,68 +2,37 @@ import bcrypt from 'bcrypt';
 import Seeder from '../../app/core/database/Seeder';
 import { Role } from '../prisma/enums';
 import { UserCreateInput } from '../prisma/models';
+import appConfig from 'config/app';
 
 class UserSeeder extends Seeder {
-<<<<<<< HEAD
-  public run() {
-    const users = [...admins, ...students, ...professors];
-    //const password = this.getPassword();
-
-    const data = users.map(user => ({
-      ...user,
-      password: bcrypt.hashSync(this.getPasswordForRole(user.role!), 12)
-    })) as UserCreateInput[];
-=======
 	public run() {
-		const users = [...admins, ...professors, ...students];
-		const password = this.getPassword();
+		const users = [...admins, ...students, ...professors];
+		//const password = this.getPassword();
 
-		const data = this.populateUserPasswords(
-			users,
-			password,
-		) as UserCreateInput[];
->>>>>>> master
+		const data = this.populateUserPasswords(users);
 
 		return this.database.user.createMany({ data });
 	}
 
-<<<<<<< HEAD
-   private getPasswordForRole(role: Role): string {
-    switch (role) {
-      case Role.ADMIN:
-        return 'admin123';
-      case Role.PROFESSOR:
-        return 'prof123';
-      case Role.STUDENT:
-        return 'student123';
-      default:
-        return 'password123';
-    }
-  }
-
-//  private populateUserPasswords(
-//    users: Partial<UserCreateInput>[],
-//    password: string
-//  ): Partial<UserCreateInput>[] {
-//    return users.map((user) => ({ ...user, password }));
-//  }
-//
-//  private getPassword(): string {
-//    return bcrypt.hashSync('', 12);
-//  }
-//}
-=======
 	private populateUserPasswords(
 		users: Partial<UserCreateInput>[],
-		password: string,
-	): Partial<UserCreateInput>[] {
-		return users.map((user) => ({ ...user, password }));
+	): UserCreateInput[] {
+		const rolePasswordMap = this.getRolePasswordMap();
+
+		return users.map((user) => ({
+			...user,
+			password: rolePasswordMap[user.role!],
+		})) as UserCreateInput[];
 	}
 
-	private getPassword(): string {
-		return bcrypt.hashSync('', 12);
+	private getRolePasswordMap(): Record<Role | 'undefined', string> {
+		return {
+			[Role.ADMIN]: bcrypt.hashSync('admin123', appConfig.bcryptRounds),
+			[Role.PROFESSOR]: bcrypt.hashSync('prof123', appConfig.bcryptRounds),
+			[Role.STUDENT]: bcrypt.hashSync('student123', appConfig.bcryptRounds),
+			undefined: bcrypt.hashSync('password123', appConfig.bcryptRounds),
+		};
 	}
->>>>>>> master
 }
 const admins: Partial<UserCreateInput>[] = [
 	{
@@ -103,16 +72,13 @@ const professors: Partial<UserCreateInput>[] = [
 		email: 'andrija.aleksic@atvssnis.edu.rs',
 		emailVerifiedAt: new Date(),
 	},
-];
-
-const professors: Partial<UserCreateInput>[] = [
-  {
-    role: Role.PROFESSOR,
-    firstName: 'Mirko',
-    lastName: 'Kosanovic',
-    email: 'prof@example.com',
-    emailVerifiedAt: new Date(),
-  },
+	{
+		role: Role.PROFESSOR,
+		firstName: 'Mirko',
+		lastName: 'Kosanovic',
+		email: 'prof@example.com',
+		emailVerifiedAt: new Date(),
+	},
 ];
 
 let students: Partial<UserCreateInput>[] = [
