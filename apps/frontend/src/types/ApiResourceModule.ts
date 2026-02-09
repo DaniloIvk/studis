@@ -22,7 +22,7 @@ export type BasicApiResourceModuleProps<Model extends ItemProps> = {
 		readonly confirmDeleteTitle: string;
 		readonly confirmDeleteDescription?: string;
 	};
-	hideActions?: boolean; // ✅ Add this
-	hideAddButton?: boolean; // ✅ Add this
-	readOnly?: boolean; // ✅ Add this
+	hideActions?: boolean;
+	hideAddButton?: boolean;
+	readOnly?: boolean;
 };

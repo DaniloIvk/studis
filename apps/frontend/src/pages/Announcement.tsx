@@ -2,8 +2,11 @@ import { searchFields, tableColumns } from '../config/fields/Announcement';
 import { formConfig } from '../validation/schemas/forms/Announcement.schema';
 import AnnouncementService from '../services/AnnouncementService';
 import BasicApiResourceModule from '../components/modules/BasicApiResourceModule';
+import { useAuth } from '../core/context/AuthContext';
 
 function Announcement() {
+	const { user } = useAuth();
+	const canManage = user?.role === 'PROFESSOR' || user?.role === 'ADMIN';
 	return (
 		<BasicApiResourceModule
 			ApiService={AnnouncementService}
@@ -20,6 +23,8 @@ function Announcement() {
 				confirmDeleteTitle: 'popups.announcement.delete_title',
 				confirmDeleteDescription: 'popups.announcement.delete_description',
 			}}
+			hideActions={!canManage}
+			hideAddButton={!canManage}
 		/>
 	);
 }

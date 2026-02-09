@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../core/context/AuthContext';
 import ExamService from '../services/ExamService';
-import GradeService from '../services/GradeServices';
+import GradeService from '../services/GradeService';
 import ApiService from '../core/service/ApiService';
 
 class UserService extends ApiService<any> {
     protected static basePath = '/users';
 }
 const userService = new UserService();
+const examService = new ExamService();
+const gradeService = new GradeService();
 
 function Dashboard() {
     const { user } = useAuth();
@@ -29,9 +31,9 @@ function Dashboard() {
 
             const promises: Promise<any>[] = []
 
-            promises.push(ExamService.getAll());
+            promises.push(examService.getAll());
 
-            promises.push(GradeService.getAll());
+            promises.push(gradeService.getAll());
 
             if (user?.role === 'ADMIN'){
                 promises.push(userService.getAll());
@@ -112,7 +114,7 @@ function Dashboard() {
                         Welcome, {user?.firstName}
                     </h2>
                     <p className="text-gray-600 dark:text-gray-400">
-                        You are logged in as <strong>{user?.firstName}~</strong>
+                        You are logged in as <strong>{user?.firstName}</strong>
                     </p>
                     <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
                       <p className="text-sm text-blue-800 dark:text-blue-200">

@@ -41,6 +41,7 @@
 		"update_exam_application": "Ažurirajte prijavu ispita",
 		"create_announcement": "Dodajte obaveštenje",
 		"update_announcement": "Ažurirajte obaveštenje",
+		"create_grade":"Dodajte ocenu",
 		"go_to_page": "Idite na stranicu",
 		"search": "Pretražite",
 		"submit": "Pošaljite",
@@ -80,7 +81,8 @@
 		"date_to": "datum do",
 		"published_at": "vreme objave",
 		"created_at": "vreme kreiranja",
-		"updated_at": "vreme ažuriranja"
+		"updated_at": "vreme ažuriranja",
+		"Student":"Student"
 	},
 	"modals": {
 		"create_user": "Novi korisnika",
@@ -94,7 +96,8 @@
 		"create_exam_application": "Nova prijava ispita",
 		"update_exam_application": "Ažuriranje prijavu ispita",
 		"create_announcement": "Novo obaveštenje",
-		"update_announcement": "Ažuriranje obaveštenje"
+		"update_announcement": "Ažuriranje obaveštenje",
+		"create_grade": "Dodajte ocenu"
 	},
 	"popups": {
 		"announcement": {

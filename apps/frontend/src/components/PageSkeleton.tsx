@@ -1,6 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar';
 import SidebarRoutes from '../config/SidebarRoutes';
+import { useAuth } from '../core/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function PageSkeleton() {
   return (
