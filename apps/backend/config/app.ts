@@ -12,6 +12,7 @@ const appConfig = {
 	port: Number(process.env.APP_PORT || 80),
 	defaultDateFormat: 'Y-M-D',
 	defaultDateTimeFormat: 'Y-M-D H:i:s',
+	bcryptRounds: Number(process.env.BCRYPT_ROUNDS) || 12,
 
 	/**
 	 * Make an URL using config's `appUrl` as base.
