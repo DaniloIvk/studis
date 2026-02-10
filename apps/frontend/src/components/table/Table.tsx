@@ -48,8 +48,11 @@ function Table({
 		if (Array.isArray(data)) {
 			return { _data: data, _pagination: null };
 		}
-		if ('data' in data && 'pagination' in data) {
-			return { _data: data.data, _pagination: data.pagination };
+		if ('data' in data) {
+			return {
+				_data: data.data,
+				_pagination:('pagination' in data) ? data.pagination : null
+			};
 		}
 
 		return { _data: [], _pagination: null };
@@ -145,6 +148,8 @@ function Table({
 	function getColumnVisibility(column: TableColumn): string {
 		return column.cardViewOnly === true ? 'lg:hidden!' : '';
 	}
+	console.log(tableData);
+
 
 	return (
 		<div className='relative w-full h-full flex flex-col justify-start items-center content-stretch overflow-x-visible overflow-y-scroll scroll-container'>
@@ -304,6 +309,7 @@ function Table({
 									className='text-center'
 								>
 									{t('no_search_results')}
+									
 								</td>
 							</tr>
 						}

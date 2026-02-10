@@ -36,6 +36,7 @@ abstract class ApiService<T extends Record<string, any>> extends Service {
 			'GET',
 			query,
 		);
+		console.log(response)
 
 		return response as Promise<PaginatorData<T>>;
 	}

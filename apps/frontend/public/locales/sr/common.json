@@ -46,7 +46,10 @@
 		"search": "Pretražite",
 		"submit": "Pošaljite",
 		"reset": "Resetujte",
-		"logout": "Odjavite se"
+		"logout": "Odjavite se",
+		"update_grade": "Ažurirajte ocenu",
+		"create_exam": "Dodajte ispit",
+		"update_exam": "Ažurirajte ispit"
 	},
 	"form": {
 		"select_option": "Odaberite opciju",
@@ -82,7 +85,12 @@
 		"published_at": "vreme objave",
 		"created_at": "vreme kreiranja",
 		"updated_at": "vreme ažuriranja",
-		"Student":"Student"
+		"student":"Student",
+		"exam": "Ispit",
+		"grade":"Ocena",
+		"exam_title":"Naslov ispita",
+		"exam_description": "Opis ispita",
+		"exam_date": "Datum ispita"
 	},
 	"modals": {
 		"create_user": "Novi korisnika",
@@ -97,7 +105,10 @@
 		"update_exam_application": "Ažuriranje prijavu ispita",
 		"create_announcement": "Novo obaveštenje",
 		"update_announcement": "Ažuriranje obaveštenje",
-		"create_grade": "Dodajte ocenu"
+		"create_grade": "Dodajte ocenu",
+		"update_grade": "Ažuriranje ocene",
+		"create_exam": "Novi ispit",
+		"update_exam": "Ažuriranje ispita"
 	},
 	"popups": {
 		"announcement": {
@@ -133,6 +144,16 @@
 			"update_title": "Ažurirajte prijavni rok?",
 			"delete_title": "Uklonite prijavni rok?",
 			"delete_description": "Ova radnja je nepovratna."
+		},
+		"grade": {
+  			"update_title": "Ažurirajte ocenu?",
+  			"delete_title": "Uklonite ocenu?",
+  			"delete_description": "Ova radnja je nepovratna."
+		},
+		"exam": {
+		"update_title": "Ažurirajte ispit?",
+		"delete_title": "Uklonite ispit?",
+		"delete_description": "Ova radnja je nepovratna."
 		}
 	}
 }

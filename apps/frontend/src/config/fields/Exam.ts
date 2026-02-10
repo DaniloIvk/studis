@@ -11,7 +11,7 @@ export const tableColumns: TableColumn[] = [
   },
   {
     header: 'Date',
-    accessor: (item) => new Date(item.date).toLocaleString(),
+    accessor: (item) => new Date(item.createdAt).toLocaleDateString(),
   },
   {
     header: 'Created By',

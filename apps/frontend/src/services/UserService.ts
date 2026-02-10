@@ -12,6 +12,13 @@ class UserService extends ApiService<User> {
 
 		return response as Promise<Partial<User>>;
 	}
+	public async getAllStudents(): Promise<Partial<User>> {
+		const response = await this.fetch(`${UserService.basePath}/all`, 'GET', {
+			role: Role.STUDENT.value,
+		});
+
+		return response as Promise<Partial<User>>;
+	}
 }
 
 export default UserService;

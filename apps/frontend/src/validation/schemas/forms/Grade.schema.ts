@@ -41,7 +41,7 @@ export const formConfig: FormContract<any> = {
 			labelKey: 'fullName',
 			apiResponseDataOptions: {
 				ApiService: UserService,
-				apiRoute: 'getAllStudents', // You may need to add this method
+				apiRoute: 'getAllStudents',
 			},
 			className,
 		},

@@ -26,7 +26,8 @@ export const tableColumns: TableColumn[] = [
         value >= 6 ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
         'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
       
-      return `<span class="px-2 py-1 rounded ${colorClass}">${value}</span>`;
+      // return `<span class="px-2 py-1 rounded ${colorClass}">${value}</span>`;
+      return value;
     },
   },
   {
@@ -55,7 +56,8 @@ export const tableColumnsStudent: TableColumn[] = [
         value >= 6 ? 'bg-yellow-100 text-yellow-800' :
         'bg-red-100 text-red-800';
       
-      return `<span class="px-2 py-1 rounded ${colorClass}">${value}</span>`;
+      //return `<span class="px-2 py-1 rounded ${colorClass}">${value}</span>`;
+      return value;
     },
   },
   {

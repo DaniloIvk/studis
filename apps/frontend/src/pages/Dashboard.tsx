@@ -85,12 +85,14 @@ function Dashboard() {
                             icon="👥"
                         />
                     )}
+                        {user?.role === 'STUDENT' && (
                         <StatCard
                             title='Upcoming Exams'
                             value={stats.upcomingExams}
                             color="green"
                             icon="📝"
                         />  
+                        )}
                         {user?.role !== 'STUDENT' && (
                         <StatCard
                             title='Upcoming Exams'
