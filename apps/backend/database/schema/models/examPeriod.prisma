@@ -5,6 +5,7 @@ model ExamPeriod {
   dateTo    DateTime @map("date_to")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  exams         Exam[]
 
   examApplications ExamApplication[]
 

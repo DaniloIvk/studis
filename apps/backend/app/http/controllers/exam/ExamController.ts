@@ -14,7 +14,8 @@ class ExamController extends Controller {
     const exams = await database.exam.findMany({
       include: {
         createdBy: true,
-        course: true
+        course: true,
+        examPeriod: true,
       },
       orderBy: { createdAt: 'desc' }
     });
@@ -37,7 +38,8 @@ public async show({ request, response }: ControllerContract) {
     where: { id: examId },
     include: {
       createdBy: true,
-      course: true
+      course: true,
+      examPeriod: true,
     }
   });
 
@@ -59,6 +61,7 @@ public async store({ request, response }: ControllerContract) {
   const exam = await database.exam.create({
     data: {
       courseId: validated.courseId,
+      examPeriodId: validated.examPeriodId,
       title: validated.title,
       description: validated.description ?? '',
       date: validated.date,
@@ -66,7 +69,8 @@ public async store({ request, response }: ControllerContract) {
     },
     include: {
       createdBy: true,
-      course: true
+      course: true,
+      examPeriod: true,
     }
   });
 
@@ -92,12 +96,14 @@ public async store({ request, response }: ControllerContract) {
 
   const updateData: Partial<{
     courseId: number;
+    examPeriodId: number;
     title: string;
     description: string;
     date: Date;
   }> = {};
   
   if (validated.courseId !== undefined) updateData.courseId = validated.courseId;
+  if (validated.examPeriodId !== undefined) updateData.examPeriodId = validated.examPeriodId;
   if (validated.title !== undefined) updateData.title = validated.title;
   if (validated.description !== undefined) updateData.description = validated.description;
   if (validated.date !== undefined) updateData.date = validated.date;
@@ -107,7 +113,8 @@ public async store({ request, response }: ControllerContract) {
     data: updateData,
     include: {
       createdBy: true,
-      course: true
+      course: true,
+      examPeriod: true,
     }
   });
 

@@ -2,10 +2,17 @@ import z from 'zod';
 import type { FormContract } from '../../../types/Form/Form';
 import CourseService from '../../../services/CourseService';
 import ValidationUtils from '../../Utils';
+import ExamPeriodService from '../../../services/ExamPeriodService';
 
 export const ExamSchema = z
 	.object({
 		courseId: z
+			.preprocess(
+				ValidationUtils.convertValueToNumber,
+				z.number().min(1).readonly(),
+			)
+			.readonly(),
+		examPeriodId: z 
 			.preprocess(
 				ValidationUtils.convertValueToNumber,
 				z.number().min(1).readonly(),
@@ -31,6 +38,17 @@ export const formConfig: FormContract<CourseService> = {
 			labelKey: 'name',
 			apiResponseDataOptions: {
 				ApiService: CourseService,
+				apiRoute: 'getAll',
+			},
+			className,
+		},
+		{
+			type: 'dropdown', 
+			name: 'examPeriodId',
+			label: 'models.exam_period',
+			labelKey: 'name', 
+			apiResponseDataOptions: {
+				ApiService: ExamPeriodService,
 				apiRoute: 'getAll',
 			},
 			className,

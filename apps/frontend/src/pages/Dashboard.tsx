@@ -39,11 +39,11 @@ function Dashboard() {
                 promises.push(userService.getAll());
             }
 
-            const resluts = await Promise.all(promises);
+            const results = await Promise.all(promises);
 
-            const examsData = resluts[0]?.data || [];
-            const gradeData = resluts[1]?.data || [];
-            const usersData = user?.role === 'ADMIN' ? (resluts[2]?.data || []) : [];
+            const examsData = results[0]?.data || [];
+            const gradeData = results[1]?.data || [];
+            const usersData = user?.role === 'ADMIN' ? (results[2]?.data || []) : [];
 
             const now = new Date();
             const upcomingExams = examsData.filter((exam:any) => 

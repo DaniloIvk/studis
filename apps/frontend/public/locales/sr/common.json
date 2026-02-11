@@ -90,7 +90,8 @@
 		"grade":"Ocena",
 		"exam_title":"Naslov ispita",
 		"exam_description": "Opis ispita",
-		"exam_date": "Datum ispita"
+		"exam_date": "Datum ispita",
+		"exam_period": "Ispitni rok"
 	},
 	"modals": {
 		"create_user": "Novi korisnika",

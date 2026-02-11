@@ -1,18 +1,21 @@
 model Exam {
-  id          Int      @id @default(autoincrement())
-  courseId    Int      @map("course_id")
-  title       String
-  description String   @default("")
-  date        DateTime
-  createdById Int?     @map("created_by_id")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id            Int      @id @default(autoincrement())
+  courseId      Int      @map("course_id")
+  examPeriodId  Int      @map("exam_period_id")
+  title         String
+  description   String   @default("")
+  date          DateTime
+  createdById   Int?     @map("created_by_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
-  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  createdBy   User?    @relation("ExamCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
-  grades      Grade[]
+  course        Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  examPeriod    ExamPeriod @relation(fields: [examPeriodId], references: [id], onDelete: Cascade)
+  createdBy     User?      @relation("ExamCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  grades        Grade[]
 
   @@index([courseId], map: "exams_course_id_fkey")
+  @@index([examPeriodId], map: "exams_exam_period_id_fkey")
   @@index([createdById], map: "exams_created_by_id_fkey")
   @@map("exams")
 }

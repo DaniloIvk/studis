@@ -84,6 +84,7 @@ export type Enrollments = {
 export type Exam = {
   id: number;
   courseId: number;
+  examPeriodId: number;
   title: string;
   description: string;
   date: Date;
@@ -91,6 +92,7 @@ export type Exam = {
   createdAt: Date;
   updatedAt: Date;
   course?: Course;
+  examPeriod?: ExamPeriod;
   createdBy?: User | null;
   grades?: Grade[];
 };
@@ -117,6 +119,7 @@ export type ExamPeriod = {
   dateTo: Date;
   createdAt: Date;
   updatedAt: Date;
+  exams?: Exam[];
   examApplications?: ExamApplication[];
 };
 

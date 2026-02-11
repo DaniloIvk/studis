@@ -1,9 +1,11 @@
+import { ExamPeriod } from 'database/prisma/browser';
 import { Exam, User, Course } from '../../../database/prisma/client';
 import Resource from '../../core/http/Resource';
 
 type ExamWithRelations = Exam & {
   createdBy?: User | null;
   course?: Course | null;
+  examPeriod?: ExamPeriod | null;
 };
 
 class ExamResource extends Resource<ExamWithRelations> {
@@ -23,6 +25,7 @@ class ExamResource extends Resource<ExamWithRelations> {
     return {
       id: this.exam.id,
       courseId: this.exam.courseId,
+      examPeriodId: this.exam.examPeriodId,
       title: this.exam.title,
       description: this.exam.description,
       date: this.exam.date,
@@ -37,6 +40,12 @@ class ExamResource extends Resource<ExamWithRelations> {
         id: this.exam.course.id,
         name: this.exam.course.name,
         index: this.exam.course.index
+      } : null,
+      examPeriod: this.exam.examPeriod ? {
+        id: this.exam.examPeriod.id,
+        name: this.exam.examPeriod.name, 
+        dateFrom: this.exam.examPeriod.dateFrom,
+        dateTo: this.exam.examPeriod.dateTo
       } : null,
       createdAt: this.exam.createdAt,
       updatedAt: this.exam.updatedAt

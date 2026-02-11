@@ -1,5 +1,6 @@
 export interface CreateExamData {
   courseId: number;
+  examPeriodId: number;
   title: string;
   description: string;
   date: Date;
@@ -8,6 +9,7 @@ export interface CreateExamData {
 
 export interface UpdateExamData {
   courseId?: number;
+  examPeriodId?: number;
   title?: string;
   description?: string;
   date?: Date;

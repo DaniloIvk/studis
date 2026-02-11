@@ -10,6 +10,10 @@ export const tableColumns: TableColumn[] = [
     accessor: (item) => item.course?.name || 'N/A',
   },
   {
+    header: 'Exam Period',
+    accessor: (item) => item.examPeriod?.name || 'N/A'
+  },
+  {
     header: 'Date',
     accessor: (item) => new Date(item.createdAt).toLocaleDateString(),
   },
