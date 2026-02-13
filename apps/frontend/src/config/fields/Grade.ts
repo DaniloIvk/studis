@@ -69,12 +69,14 @@ export const tableColumnsStudent: TableColumn[] = [
 export const searchFields = [
   {
     name: 'student.firstName',
-    label: 'Student Name',
+    label: 'models.student_name',
     type: 'text' as const,
+    className: 'col-span-12 sm:col-span-6',
   },
   {
     name: 'exam.title',
-    label: 'Exam',
+    label: 'models.exam',
     type: 'text' as const,
+    className: 'col-span-12 sm:col-span-6',
   },
 ];

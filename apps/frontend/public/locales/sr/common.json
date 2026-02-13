@@ -86,6 +86,7 @@
 		"created_at": "vreme kreiranja",
 		"updated_at": "vreme ažuriranja",
 		"student":"Student",
+		"student_name":"Student",
 		"exam": "Ispit",
 		"grade":"Ocena",
 		"exam_title":"Naslov ispita",

@@ -4,7 +4,7 @@ import { currentUser } from '../../../core/helpers/currentUser'
 
 const CreateExamSchema = z.object({
     courseId: z.number().int().positive(),
-    examPeriiodId: z.number().int().positive(),
+    examPeriodId: z.number().int().positive(),
     title: z.string().min(1).max(255),
     description: z.string().optional().default(''),
     date: z.preprocess(

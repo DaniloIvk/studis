@@ -2,17 +2,14 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../core/context/AuthContext';
 import ExamService from '../services/ExamService';
 import GradeService from '../services/GradeService';
-import ApiService from '../core/service/ApiService';
+import UserService from '../services/UserService';
 
-class UserService extends ApiService<any> {
-    protected static basePath = '/users';
-}
 const userService = new UserService();
 const examService = new ExamService();
 const gradeService = new GradeService();
 
 function Dashboard() {
-    const { user } = useAuth();
+    const { user, loading: authLoading } = useAuth();
     const [ stats, setStats ] = useState({
         totalUsers: 0,
         upcomingExams: 0,
@@ -22,111 +19,104 @@ function Dashboard() {
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
-        fetchStats();
-    }, []);
+        if ( !authLoading && user){
+            fetchStats();    
+        }
+    }, [authLoading, user]);
 
     const fetchStats = async () => {
-        try{
+        try {
             setLoading(true);
-
-            const promises: Promise<any>[] = []
+            const promises: Promise<any>[] = [];
 
             promises.push(examService.getAll());
-
             promises.push(gradeService.getAll());
 
             if (user?.role === 'ADMIN'){
-                promises.push(userService.getAll());
+                promises.push(userService.getAllUsers());
             }
 
             const results = await Promise.all(promises);
 
             const examsData = results[0]?.data || [];
             const gradeData = results[1]?.data || [];
-            const usersData = user?.role === 'ADMIN' ? (results[2]?.data || []) : [];
-
+            const usersData = user?.role === 'ADMIN' ? 
+                (Array.isArray(results[2]) ? results[2] : (results[2]?.data || [])) 
+                : [];
+            
             const now = new Date();
             const upcomingExams = examsData.filter((exam:any) => 
                 new Date(exam.date) > now
             ).length;
 
             setStats({
-                totalUsers : usersData.length,
+                totalUsers: usersData.length,
                 upcomingExams,
                 totalGrades: gradeData.length,
-                myGrades: user?.role === 'STUDENT'? gradeData.length : 0
+                myGrades: user?.role === 'STUDENT' ? gradeData.length : 0
             });
-        }catch(error) {
+        } catch (error) {
             console.error('Failed to fetch data', error);
-        }finally{
+        } finally {
             setLoading(false);
         }
     };
 
-    if (loading) {
+    if (authLoading || loading) {
         return (
-            <div className='flex items-center justify-center min-h-screen'>
-                <div className="text-lg">Loading dashboard...</div>
+            <div className='flex flex-col items-center justify-center min-h-screen bg-gray-50!'>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600! mb-4"></div>
+                <div className="text-gray-600! font-medium">Učitavanje kontrolne table...</div>
             </div>
         );
     }
 
-    return (
-        <div className='w-full h-full p-6 overflow-y-auto'>
-            <div className='max-w-6xl mx-auto'>
-                <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    {user?.role === 'ADMIN' && (
-                        <StatCard
-                            title='Total Users'
-                            value={stats.totalUsers}
-                            color="blue"
-                            icon="👥"
-                        />
-                    )}
-                        {user?.role === 'STUDENT' && (
-                        <StatCard
-                            title='Upcoming Exams'
-                            value={stats.upcomingExams}
-                            color="green"
-                            icon="📝"
-                        />  
-                        )}
-                        {user?.role !== 'STUDENT' && (
-                        <StatCard
-                            title='Upcoming Exams'
-                            value={stats.upcomingExams}
-                            color="green"
-                            icon="📝"
-                        />
-                        )}                  
-                        {user?.role === 'STUDENT' && (
-                        <StatCard
-                            title='My Grades'
-                            value={stats.myGrades}
-                            color="yellow"
-                            icon="⭐"
-                        />
-                        )}                  
-                </div>
-                
-                <div className='bg-white dark:bg-gray-800 rounded-lg shadow p-6'>
-                    <h2 className='text-xl font-semibold mb-4'>
-                        Welcome, {user?.firstName}
-                    </h2>
-                    <p className="text-gray-600 dark:text-gray-400">
-                        You are logged in as <strong>{user?.firstName}</strong>
-                    </p>
-                    <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                      <p className="text-sm text-blue-800 dark:text-blue-200">
-                        Use the sidebar to navigate through the system.
-                      </p>
-                    </div>                    
-                </div>
-            </div>
+return (
+    <div className='w-full h-full p-6 md:p-8 overflow-y-auto bg-gray-50! dark:bg-gray-950! transition-colors duration-300'>
+      <div className='max-w-6xl mx-auto'>
+        <div className="mb-8">
+          <h1 className="text-3xl font-extrabold text-gray-900! dark:text-white! tracking-tight">Kontrolna tabla</h1>
+          <p className="text-gray-500! dark:text-gray-400! mt-1">Pregled vaših aktivnosti i statistike sistema.</p>
         </div>
-    );
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {user?.role === 'ADMIN' && (
+            <StatCard title='Ukupno korisnika' value={stats.totalUsers} color="blue" icon="👥" />
+          )}
+          <StatCard title='Predstojeći ispiti' value={stats.upcomingExams} color="green" icon="📝" />
+          {user?.role === 'STUDENT' && (
+            <StatCard title='Moje ocene' value={stats.myGrades} color="yellow" icon="⭐" />
+          )}
+        </div>
+        
+        <div className='bg-white! dark:bg-gray-900! rounded-2xl! shadow-sm! border! border-gray-100! dark:border-gray-800! overflow-hidden'>
+          <div className="p-8">
+            <div className="flex items-center mb-4">
+              <div className="w-2 h-8 bg-indigo-600! rounded-full! mr-4"></div>
+              <h2 className='text-2xl! font-bold text-gray-800! dark:text-white!'>
+                Dobrodošli nazad, {user?.firstName}!
+              </h2>
+            </div>
+            
+            <p className="text-gray-600! dark:text-gray-400! text-lg mb-6">
+              Prijavljeni ste kao: <span className="font-semibold text-indigo-600! dark:text-indigo-400!">{user?.firstName} {user?.lastName}</span> 
+              <span className="mx-2 text-gray-300! dark:text-gray-700!">|</span>
+              Uloga: <span className="px-3 py-1 bg-gray-100! dark:bg-gray-800! rounded-full! text-sm font-medium">{user?.role}</span>
+            </p>
+
+            <div className="p-5 bg-indigo-50! dark:bg-indigo-900/30! rounded-xl! border! border-indigo-100! dark:border-indigo-900/50!">
+              <div className="flex items-start">
+                <span className="text-xl mr-3">💡</span>
+                <p className="text-sm text-indigo-900! dark:text-indigo-200! leading-relaxed">
+                  Koristite bočni meni sa leve strane kako biste pristupili sistemu.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 interface StatCardProps {
@@ -137,28 +127,29 @@ interface StatCardProps {
 }
 
 function StatCard({ title, value, color, icon }: StatCardProps) {
-  const colorClasses = {
-    blue: 'bg-blue-500',
-    green: 'bg-green-500',
-    purple: 'bg-purple-500',
-    yellow: 'bg-yellow-500'
+  const themes = {
+    blue: 'from-blue-500! to-blue-600! shadow-blue-100!',
+    green: 'from-green-500! to-green-600! shadow-green-100!',
+    purple: 'from-purple-500! to-purple-600! shadow-purple-100!',
+    yellow: 'from-yellow-400! to-yellow-500! shadow-yellow-100!'
   };
 
-  return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 border border-gray-200 dark:border-gray-700">
-      <div className="flex items-center justify-between mb-4">
-        <div className={`w-12 h-12 ${colorClasses[color]} rounded-full flex items-center justify-center text-2xl`}>
+ return (
+    <div className="bg-white! dark:bg-gray-900! rounded-2xl! shadow-lg! p-6! border! border-gray-100! dark:border-gray-800! transition-transform! hover:scale-[1.02]!">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-xs font-bold text-gray-400! dark:text-gray-500! uppercase! tracking-widest! mb-1">
+            {title}
+          </p>
+          <h3 className="text-3xl font-black! text-gray-800! dark:text-white!">
+            {value}
+          </h3>
+        </div>
+        <div className={`w-14 h-14 bg-gradient-to-br! ${themes[color]} rounded-2xl! flex! items-center! justify-center! text-2xl! shadow-inner!`}>
           {icon}
         </div>
-        <span className="text-3xl font-bold text-gray-800 dark:text-gray-200">
-          {value}
-        </span>
       </div>
-      <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">
-        {title}
-      </h3>
     </div>
   );
 }
-
 export default Dashboard;

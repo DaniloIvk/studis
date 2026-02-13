@@ -15,7 +15,7 @@ function Sidebar({ items = [] }: SidebarProps) {
 	};
 
 	return (
-		<nav className='material bg-primary-light dark:bg-primary-dark text-dark dark:text-black fill-dark dark:fill-black min-w-64 max-w-64 h-full hidden md:flex flex-col transition-colors! duration-200! overflow-clip select-none'>
+		<nav className='material bg-primary-light dark:bg-primary-dark text-light! dark:text-black fill-light min-w-64 max-w-64 h-full hidden md:flex flex-col transition-colors! duration-200! overflow-clip select-none'>
 			<img
 				src={Logo}
 				alt='Logo'
@@ -34,7 +34,7 @@ function Sidebar({ items = [] }: SidebarProps) {
 					</p>
 					<button
 						onClick={handleLogout}
-						className='w-full px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-sm'
+						className='w-full! px-3! py-2! bg-red-500/65! text-light! rounded hover:bg-red-600/65! text-sm!'
 					>
 						Logout
 					</button>

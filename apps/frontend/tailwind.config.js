@@ -18,10 +18,10 @@ export default {
          * Main colors
          */
         primary: {
-          DEFAULT: '#677DB7', // Glaucous
-          hover: '#5B72AC',
-          light: '#8A9CD8',
-          dark: '#506599',
+          DEFAULT: '#466cd4', // Glaucous
+          hover: '#395db6',
+          light: '#405ebf',
+          dark: '#3257b5',
         },
         neutral: {
           DEFAULT: '#8E9196', // Cool Gray / Silver Chalice

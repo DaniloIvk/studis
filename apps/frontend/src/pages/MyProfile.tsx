@@ -7,7 +7,7 @@ function MyProfile() {
   const { user, refreshUser } = useAuth();
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' | '' }>({ text: '', type: '' });
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -35,12 +35,12 @@ function MyProfile() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessage('');
+    setMessage({ text: '', type: '' });
     setLoading(true);
 
     try {
       if (formData.newPassword && formData.newPassword !== formData.confirmPassword) {
-        setMessage('New passwords do not match');
+        setMessage({ text: 'Nove lozinke se ne podudaraju', type: 'error' });
         setLoading(false);
         return;
       }
@@ -59,10 +59,9 @@ function MyProfile() {
 
       await AuthService.updateProfileData(updateData);
       await refreshUser();
-      setMessage('Profile updated successfully');
+      setMessage({ text: 'Profil je uspešno ažuriran', type: 'success' });
       setEditing(false);
       
-      // Clear password fields
       setFormData(prev => ({
         ...prev,
         currentPassword: '',
@@ -70,7 +69,10 @@ function MyProfile() {
         confirmPassword: ''
       }));
     } catch (error: any) {
-      setMessage(error.error || 'Failed to update profile');
+      setMessage({ 
+        text: error.error || 'Došlo je do greške prilikom ažuriranja profila', 
+        type: 'error' 
+      });
     } finally {
       setLoading(false);
     }
@@ -78,151 +80,122 @@ function MyProfile() {
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading...</div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-50!">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600! mb-4"></div>
+          <p className="text-gray-600! font-medium">Učitavanje profila...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">My Profile</h1>
+    <div className="max-w-3xl mx-auto p-4 md:p-8 bg-gray-50! dark:bg-dark! min-h-screen transition-colors duration-300">
+      <div className="mb-6">
+        <h1 className="text-3xl font-extrabold text-gray-900! dark:text-white! tracking-tight">Moj Profil</h1>
+        <p className="text-gray-500! dark:text-gray-400! mt-1">Upravljajte svojim ličnim podacima.</p>
+      </div>
 
-      {message && (
-        <div className={`mb-4 p-4 rounded ${
-          message.includes('success') 
-            ? 'bg-green-100 text-green-700' 
-            : 'bg-red-100 text-red-700'
+      {message.text && (
+        <div className={`mb-6 p-4 rounded-xl border! transition-all ${
+          message.type === 'success' 
+            ? 'bg-green-50! border-green-200! text-green-800! dark:bg-green-900/20! dark:border-green-800! dark:text-green-300!' 
+            : 'bg-red-50! border-red-200! text-red-800! dark:bg-red-900/20! dark:border-red-800! dark:text-red-300!'
         }`}>
-          {message}
+          <span className="font-medium">{message.text}</span>
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Personal Information</h2>
+      <div className="bg-white! dark:bg-gray-900! rounded-2xl shadow-sm border! border-gray-100! dark:border-gray-800! overflow-hidden">
+        <div className="px-6 py-4 border-b! border-gray-100! dark:border-gray-800! flex justify-between items-center bg-white! dark:bg-gray-900!">
+          <h2 className="text-lg font-bold text-gray-800! dark:text-white!">Lične informacije</h2>
           {!editing && (
             <button
               onClick={() => setEditing(true)}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="px-4 py-2 bg-indigo-600! text-white! font-semibold rounded-lg hover:bg-indigo-700! shadow-sm transition-all"
             >
-              Edit Profile
+              Izmeni profil
             </button>
           )}
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+        <form onSubmit={handleSubmit} className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium mb-2">First Name</label>
+              <label className="block text-xs font-semibold text-gray-600! dark:text-gray-400! uppercase mb-1">Ime</label>
               <input
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                 disabled={!editing}
-                className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-100"
+                className="w-full px-4 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg focus:ring-2 focus:ring-indigo-500! bg-white! dark:bg-gray-950! text-gray-900! dark:text-white! disabled:bg-gray-50! dark:disabled:bg-gray-800! disabled:text-gray-400!"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Last Name</label>
+              <label className="block text-xs font-semibold text-gray-600! dark:text-gray-400! uppercase mb-1">Prezime</label>
               <input
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 disabled={!editing}
-                className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-100"
+                className="w-full px-4 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg focus:ring-2 focus:ring-indigo-500! bg-white! dark:bg-gray-950! text-gray-900! dark:text-white! disabled:bg-gray-50! dark:disabled:bg-gray-800! disabled:text-gray-400!"
               />
             </div>
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Email</label>
-            <input
-              type="email"
-              value={user.email}
-              disabled
-              className="w-full px-3 py-2 border rounded-lg bg-gray-100"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Phone</label>
-            <input
-              type="tel"
-              value={formData.phoneNumber}
-              onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-              disabled={!editing}
-              className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-100"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-2">Address</label>
-            <textarea
-              value={formData.address}
-              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              disabled={!editing}
-              className="w-full px-3 py-2 border rounded-lg disabled:bg-gray-100"
-              rows={3}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-xs font-semibold text-gray-600! dark:text-gray-400! uppercase mb-1">Email</label>
+              <input
+                type="email"
+                value={user.email}
+                disabled
+                className="w-full px-4 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg bg-gray-50! dark:bg-dark! text-gray-400! cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-gray-600! dark:text-gray-400! uppercase mb-1">Telefon</label>
+              <input
+                type="tel"
+                value={formData.phoneNumber}
+                onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                disabled={!editing}
+                className="w-full px-4 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg focus:ring-2 focus:ring-indigo-500! bg-white! dark:bg-gray-950! text-gray-900! dark:text-white! disabled:bg-gray-50! dark:disabled:dark:bg-gray-800! disabled:text-gray-400!"
+              />
+            </div>
           </div>
 
           {editing && (
-            <>
-              <hr className="my-6" />
-              <h3 className="text-lg font-semibold mb-4">Change Password (Optional)</h3>
-              
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2">Current Password</label>
+            <div className="mt-6 pt-6 border-t! border-gray-100! dark:border-gray-800! animate-in fade-in">
+              <h3 className="text-md font-bold text-gray-800! dark:text-white! mb-4">Promena lozinke</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <input
                   type="password"
+                  placeholder="Trenutna"
                   value={formData.currentPassword}
                   onChange={(e) => setFormData({ ...formData, currentPassword: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-lg"
+                  className="w-full px-3 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg bg-white! dark:bg-gray-800! text-white!"
+                />
+                <input
+                  type="password"
+                  placeholder="Nova"
+                  value={formData.newPassword}
+                  onChange={(e) => setFormData({ ...formData, newPassword: e.target.value })}
+                  className="w-full px-3 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg bg-white! dark:bg-gray-800! text-white!"
+                />
+                <input
+                  type="password"
+                  placeholder="Potvrda"
+                  value={formData.confirmPassword}
+                  onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                  className="w-full px-3 py-2 border! border-gray-200! dark:border-gray-700! rounded-lg bg-white! dark:bg-gray-800! text-white!"
                 />
               </div>
-
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div>
-                  <label className="block text-sm font-medium mb-2">New Password</label>
-                  <input
-                    type="password"
-                    value={formData.newPassword}
-                    onChange={(e) => setFormData({ ...formData, newPassword: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Confirm New Password</label>
-                  <input
-                    type="password"
-                    value={formData.confirmPassword}
-                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                    className="w-full px-3 py-2 border rounded-lg"
-                  />
-                </div>
+              <div className="flex gap-3">
+                <button type="submit" className="flex-1 py-2.5 bg-indigo-600! text-white! font-bold rounded-xl hover:bg-indigo-700!">Sačuvaj</button>
+                <button type="button" onClick={() => setEditing(false)} className="px-6 py-2.5 bg-gray-100! dark:bg-gray-800! text-gray-700! dark:text-gray-300! font-bold rounded-xl">Otkaži</button>
               </div>
-
-              <div className="flex gap-4">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-                >
-                  {loading ? 'Saving...' : 'Save Changes'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEditing(false);
-                    setMessage('');
-                  }}
-                  className="px-6 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
-              </div>
-            </>
+            </div>
           )}
         </form>
       </div>

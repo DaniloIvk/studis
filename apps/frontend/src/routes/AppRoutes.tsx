@@ -6,6 +6,7 @@ import AuthGuard from './AuthGuard';
 import PageSkeleton from '../components/PageSkeleton';
 import SidebarRoutes from '../config/SidebarRoutes';
 import { isSidebarButton } from '../types/Sidebar';
+import Dashboard from '../pages/Dashboard';
 
 function AppRoutes() {
 	const sidebarRoutes = SidebarRoutes.filter((route) => isSidebarButton(route));
@@ -23,7 +24,7 @@ function AppRoutes() {
 				<Route element={<PageSkeleton />}>
 					<Route
 						path='/'
-						element={<AboutUs />}
+						element={<Dashboard />}
 					/>
 					{sidebarRoutes.map((route) => (
 						<Route
