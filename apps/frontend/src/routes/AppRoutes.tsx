@@ -24,7 +24,7 @@ function AppRoutes() {
 					element={<Login />}
 				/>
 				<Route
-					path='/about'
+					path='/about-us'
 					element={<AboutUs />}
 				/>
 			</Route>

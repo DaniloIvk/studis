@@ -132,7 +132,6 @@ function Homepage() {
 					</p>
 
 					<div className='flex gap-4'>
-						{/* 3D Prilagođena dugmad umesto standardnih */}
 						<PopupButton
 							label={t('homepage.enter_portal')}
 							onClick={() => navigate('/dashboard', { replace: true })}
@@ -140,7 +139,7 @@ function Homepage() {
 						<PopupButton
 							label={t('homepage.about_academy')}
 							theme='success'
-							onClick={() => navigate('/about', { replace: true })}
+							onClick={() => navigate('/about-us')}
 						/>
 					</div>
 				</div>
