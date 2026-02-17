@@ -1,6 +1,6 @@
 import { t } from 'i18next';
 import type { SidebarButtonProps } from '../../types/Sidebar';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import type { BaseSyntheticEvent } from 'react';
 import useQuery from '../../hooks/useQuery';
 import { concat } from '../../common/helpers';
@@ -8,6 +8,10 @@ import { concat } from '../../common/helpers';
 function SidebarButton({ item }: { item: SidebarButtonProps }) {
 	const navigate = useNavigate();
 	const query = useQuery();
+	const { pathname } = useLocation();
+	const itemPath = item.path.replace(/^\/*/, '/');
+
+	console.log(pathname, itemPath);
 
 	function handleRouteChange(event: BaseSyntheticEvent) {
 		event.stopPropagation();
@@ -16,7 +20,7 @@ function SidebarButton({ item }: { item: SidebarButtonProps }) {
 		// Reset query between different pages
 		query.use({});
 
-		navigate(item.path, { replace: true, viewTransition: true });
+		navigate(itemPath, { replace: true, viewTransition: true });
 	}
 
 	return (
@@ -28,13 +32,13 @@ function SidebarButton({ item }: { item: SidebarButtonProps }) {
 				<item.icon
 					className={concat(
 						'fill-inherit w-5 h-5 transition-transform! duration-200! group-hover:scale-110',
-						item.path === 'users' ? 'scale-120' : '',
+						itemPath === pathname ? 'scale-120' : '',
 					)}
 				/>
 				<span
 					className={concat(
 						'text-start',
-						item.path === 'users' ? 'font-semibold' : 'font-medium',
+						itemPath === pathname ? 'font-semibold' : 'font-medium',
 					)}
 				>
 					{t(item.label)}
