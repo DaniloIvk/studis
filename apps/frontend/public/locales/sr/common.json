@@ -1,6 +1,7 @@
 {
 	"": "",
 	"404_message": "Stranica nije pronađena",
+	"app_name": "Akademija Aleksić",
 	"back_to_homepage": "Nazad na početnu stranicu",
 	"email": "Email",
 	"password": "Lozinka",
@@ -28,6 +29,33 @@
 	"no_search_results": "Nema podataka za prikaz.",
 	"date_from": "Datum od",
 	"date_to": "Datum do",
+	"news-marquee": {
+		"art_club": "Klub umetnika se sastaje svakog utorka u 15h!",
+		"exam_registration": "Prijava ispita se zatvara u petak!",
+		"new_books": "Novi materijali su dostupni u biblioteci!",
+		"soccer_tryouts": "Probni treninzi za fudbalski tim sledeće nedelje!"
+	},
+	"homepage": {
+		"welcome": "Dobrodošli na",
+		"academy_name": "Akademiju Aleksić",
+		"hero_description": "Vaše kreativno putovanje počinje ovde. Proverite svoje obaveze, pristupite materijalima ili se prijavite za predstojeće ispitne rokove.",
+		"enter_portal": "Uđite na portal",
+		"about_academy": "O akademiji",
+		"student_portal": "Studentski Portal",
+		"portal_description": "Sve što vam je potrebno na jednom mestu!",
+		"quick_access": {
+			"exams": "Moji Ispiti",
+			"exams_description": "Prijavite ili odjavite ispite u tekućem roku",
+			"dashboard": "Kontrolna tabla",
+			"dashboard_description": "Pregledajte ocene i statistiku studiranja",
+			"materials": "Materijali",
+			"materials_description": "Preuzmite materijale za svoje predmete",
+			"announcements": "Obaveštenja",
+			"announcements_description": "Objavite i pregledajte novosti na akademiji",
+			"exam_periods": "Ispitni rokovi",
+			"exam_periods_description": "Upravljajte aktuelnim ispitnim rokovima"
+		}
+	},
 	"buttons": {
 		"create_user": "Dodajte korisnika",
 		"update_user": "Ažurirajte korisnika",
@@ -41,11 +69,12 @@
 		"update_exam_application": "Ažurirajte prijavu ispita",
 		"create_announcement": "Dodajte obaveštenje",
 		"update_announcement": "Ažurirajte obaveštenje",
-		"create_grade":"Dodajte ocenu",
+		"create_grade": "Dodajte ocenu",
 		"go_to_page": "Idite na stranicu",
 		"search": "Pretražite",
 		"submit": "Pošaljite",
 		"reset": "Resetujte",
+		"login": "Ulogujte se",
 		"logout": "Odjavite se",
 		"update_grade": "Ažurirajte ocenu",
 		"create_exam": "Dodajte ispit",
@@ -85,11 +114,11 @@
 		"published_at": "vreme objave",
 		"created_at": "vreme kreiranja",
 		"updated_at": "vreme ažuriranja",
-		"student":"Student",
-		"student_name":"Student",
+		"student": "Student",
+		"student_name": "Student",
 		"exam": "Ispit",
-		"grade":"Ocena",
-		"exam_title":"Naslov ispita",
+		"grade": "Ocena",
+		"exam_title": "Naslov ispita",
 		"exam_description": "Opis ispita",
 		"exam_date": "Datum ispita",
 		"exam_period": "Ispitni rok"
@@ -148,14 +177,14 @@
 			"delete_description": "Ova radnja je nepovratna."
 		},
 		"grade": {
-  			"update_title": "Ažurirajte ocenu?",
-  			"delete_title": "Uklonite ocenu?",
-  			"delete_description": "Ova radnja je nepovratna."
+			"update_title": "Ažurirajte ocenu?",
+			"delete_title": "Uklonite ocenu?",
+			"delete_description": "Ova radnja je nepovratna."
 		},
 		"exam": {
-		"update_title": "Ažurirajte ispit?",
-		"delete_title": "Uklonite ispit?",
-		"delete_description": "Ova radnja je nepovratna."
+			"update_title": "Ažurirajte ispit?",
+			"delete_title": "Uklonite ispit?",
+			"delete_description": "Ova radnja je nepovratna."
 		}
 	}
 }

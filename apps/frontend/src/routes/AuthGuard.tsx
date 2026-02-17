@@ -19,7 +19,7 @@ function AuthGuard({ isPublic = false }: AuthGuardProps) {
   const isLoggedIn = !!user;
 
   if (isPublic && isLoggedIn) {
-    return <Navigate to='/' replace />;
+    // return <Navigate to='/' replace />;
   }
 
   if (!isPublic && !isLoggedIn) {

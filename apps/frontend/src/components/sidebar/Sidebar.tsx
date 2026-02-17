@@ -16,12 +16,15 @@ function Sidebar({ items = [] }: SidebarProps) {
 
 	return (
 		<nav className='material bg-primary-light dark:bg-primary-dark text-light! dark:text-black fill-light min-w-64 max-w-64 h-full hidden md:flex flex-col transition-colors! duration-200! overflow-clip select-none'>
-			<img
-				src={Logo}
-				alt='Logo'
-				loading='lazy'
-				className='p-14 place-self-center dark:opacity-75'
-			/>
+			<div className='place-self-center p-14'>
+				<img
+					src={Logo}
+					alt='Logo'
+					loading='lazy'
+					onClick={() => navigate('/')}
+					className='dark:opacity-75 rounded-full hover:cursor-pointer active:cursor-pointer'
+				/>
+			</div>
 			<SidebarItems
 				items={items}
 				className='flex-1 px-2 overflow-x-clip overflow-y-auto'
