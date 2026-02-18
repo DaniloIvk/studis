@@ -89,7 +89,8 @@
 		"logout": "Odjavite se",
 		"update_grade": "Ažurirajte ocenu",
 		"create_exam": "Dodajte ispit",
-		"update_exam": "Ažurirajte ispit"
+		"update_exam": "Ažurirajte ispit",
+		"update_profile": "Ažurirajte profil"
 	},
 	"form": {
 		"select_option": "Odaberite opciju",
@@ -119,6 +120,8 @@
 		"espb": "ESPB",
 		"file": "fajl",
 		"description": "opis",
+		"current_password": "trenutna lozinka",
+		"new_password": "nova lozinka",
 		"password_confirmation": "potvrda lozinke",
 		"date_from": "datum od",
 		"date_to": "datum do",
