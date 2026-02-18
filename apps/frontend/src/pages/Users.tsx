@@ -1,13 +1,14 @@
 import { searchFields, tableColumns } from '../config/fields/User';
-import { formConfig } from '../validation/schemas/forms/User.schema';
+import { getFormConfig } from '../validation/schemas/forms/User.schema';
 import UserService from '../services/UserService';
 import BasicApiResourceModule from '../components/modules/BasicApiResourceModule';
+import Role from '../enums/Role';
 
 function Users() {
 	return (
 		<BasicApiResourceModule
 			ApiService={UserService}
-			formConfig={formConfig}
+			formConfig={getFormConfig(Role.STUDENT.value)}
 			tableColumns={tableColumns}
 			searchFields={searchFields}
 			translations={{
