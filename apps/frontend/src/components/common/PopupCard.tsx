@@ -1,5 +1,6 @@
 import type { PopupButtonProps, PopupCardProps } from '../../types/Button';
 import { concat, logData } from '../../common/helpers';
+import type { ThemeColor } from '../../types/Common';
 
 function PopupCard({
 	type = 'button',
@@ -8,7 +9,7 @@ function PopupCard({
 	disabled,
 	children,
 }: PopupCardProps) {
-	const themeColors: Record<PopupButtonProps['theme'] & string, string> = {
+	const themeColors: Record<ThemeColor, string> = {
 		success: 'bg-success border-success-dark',
 		warn: 'bg-warn border-warn-dark',
 		error: 'bg-error border-error-dark',
