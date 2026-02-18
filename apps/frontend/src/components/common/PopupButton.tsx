@@ -1,6 +1,7 @@
 import { t } from 'i18next';
 import type { PopupButtonProps } from '../../types/Button';
 import { concat, logData } from '../../common/helpers';
+import type { ThemeColor } from '../../types/Common';
 
 function PopupButton({
 	type = 'button',
@@ -9,7 +10,7 @@ function PopupButton({
 	theme = 'primary',
 	disabled,
 }: PopupButtonProps) {
-	const themeColors: Record<PopupButtonProps['theme'] & string, string> = {
+	const themeColors: Record<ThemeColor, string> = {
 		success: 'bg-success border-success-dark',
 		warn: 'bg-warn border-warn-dark',
 		error: 'bg-error border-error-dark',
