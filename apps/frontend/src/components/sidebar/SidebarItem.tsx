@@ -11,8 +11,6 @@ function SidebarButton({ item }: { item: SidebarButtonProps }) {
 	const { pathname } = useLocation();
 	const itemPath = item.path.replace(/^\/*/, '/');
 
-	console.log(pathname, itemPath);
-
 	function handleRouteChange(event: BaseSyntheticEvent) {
 		event.stopPropagation();
 		event.preventDefault();
