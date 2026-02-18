@@ -27,6 +27,8 @@ function EnumDropdown({
 	className = '',
 	multiselect = false,
 	allowClear = false,
+	readOnly = false,
+	disabled = false,
 }: EnumDropdownProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -50,6 +52,11 @@ function EnumDropdown({
 
 	function handleSelect(event: MouseEvent<HTMLElement>): void {
 		event.stopPropagation();
+
+		if (disabled || readOnly) {
+			return;
+		}
+
 		const value = event.currentTarget.dataset.value!;
 
 		let nextValue: string | string[];
@@ -72,11 +79,19 @@ function EnumDropdown({
 	}
 
 	function toggleIsOpen(): void {
+		if (disabled || readOnly) {
+			return;
+		}
+
 		setIsOpen((isOpen: boolean) => !isOpen);
 	}
 
 	function clearValue(event: BaseSyntheticEvent): void {
 		event.stopPropagation();
+
+		if (disabled || readOnly) {
+			return;
+		}
 
 		setValue(name, [], {
 			shouldDirty: true,
@@ -107,7 +122,14 @@ function EnumDropdown({
 						allowClear && 'pr-13',
 					)}
 				>
-					<span className='w-full leading-10 text-ellipsis text-nowrap overflow-hidden'>
+					<span
+						className={concat(
+							'w-full leading-10 text-ellipsis text-nowrap overflow-hidden',
+							(disabled || readOnly) && 'text-neutral!',
+							disabled && 'cursor-not-allowed',
+							readOnly && !disabled && 'cursor-default',
+						)}
+					>
 						{labelText}
 					</span>
 					{allowClear && (
