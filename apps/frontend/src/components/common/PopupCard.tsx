@@ -10,12 +10,12 @@ function PopupCard({
 	children,
 }: PopupCardProps) {
 	const themeColors: Record<ThemeColor, string> = {
-		success: 'bg-success border-success-dark',
-		warn: 'bg-warn border-warn-dark',
-		error: 'bg-error border-error-dark',
-		critical: 'bg-critical border-critical-dark',
-		primary: 'bg-primary border-primary-dark',
-		neutral: 'bg-neutral border-neutral-dark',
+		success: 'bg-success! border-success-dark!',
+		warn: 'bg-warn! border-warn-dark!',
+		error: 'bg-error! border-error-dark!',
+		critical: 'bg-danger! border-danger-dark!',
+		primary: 'bg-primary! border-primary-dark!',
+		neutral: 'bg-neutral! border-neutral-dark!',
 	};
 
 	return (
