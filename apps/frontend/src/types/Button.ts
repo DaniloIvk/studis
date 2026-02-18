@@ -1,4 +1,5 @@
 import type { BaseSyntheticEvent, PropsWithChildren } from 'react';
+import type { ThemeColor } from './Common';
 
 export type ButtonProps = {
 	readonly type?: 'button' | 'submit' | 'reset';
@@ -7,14 +8,6 @@ export type ButtonProps = {
 	readonly onClick?: (event: BaseSyntheticEvent) => any;
 };
 
-export type PopupButtonProps = ButtonProps & {
-	readonly theme?:
-		| 'success'
-		| 'warn'
-		| 'error'
-		| 'critical'
-		| 'primary'
-		| 'neutral';
-};
+export type PopupButtonProps = ButtonProps & { readonly theme?: ThemeColor };
 
 export type PopupCardProps = PopupButtonProps & PropsWithChildren;
