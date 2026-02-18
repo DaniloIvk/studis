@@ -6,9 +6,12 @@ function corsPolicy(
   response: Response,
   next: NextFunction
 ): Response | void {
-  [appConfig.appUrl, ...appConfig.appFrontendUrls].forEach((appUrl) =>
-    response.setHeader('Access-Control-Allow-Origin', appUrl)
-  );
+  const allowedOrigins = [appConfig.appUrl, ...appConfig.appFrontendUrls];
+  const origin = request.headers.origin;
+
+  if (origin && allowedOrigins.includes(origin)) {
+    response.setHeader('Access-Control-Allow-Origin', origin);
+  }
 
   response.setHeader(
     'Access-Control-Allow-Methods',

@@ -155,6 +155,29 @@
 		"create_exam": "Novi ispit",
 		"update_exam": "Ažuriranje ispita"
 	},
+	"dashboard_page": {
+		"title": "Kontrolna tabla",
+		"subtitle": "Pregled vaših aktivnosti i statistike sistema.",
+		"loading": "Učitavanje kontrolne table...",
+		"welcome": "Dobrodošli nazad",
+		"logged_in_as": "Prijavljeni ste kao",
+		"role": "Uloga",
+		"tip": "Koristite bočni meni sa leve strane kako biste pristupili sistemu.",
+		"totalStudents": "Ukupno studenata",
+		"totalProfessors": "Ukupno profesora",
+		"totalCourses": "Ukupno predmeta",
+		"averageGrade": "Prosečna ocena",
+		"examPassRate": "Prolaznost ispita",
+		"myCourses": "Moji predmeti",
+		"studentsInMyCourses": "Studenata na mojim predmetima",
+		"upcomingExams": "Predstojeći ispiti",
+		"enrolledCourses": "Upisani predmeti",
+		"passedExams": "Položeni ispiti",
+		"pendingApplications": "Prijavljeni ispiti",
+		"chart_admin": "Raspodela ocena u sistemu",
+		"chart_professor": "Raspodela ocena na mojim predmetima",
+		"chart_student": "Moje ocene po predmetima"
+	},
 	"popups": {
 		"announcement": {
 			"update_title": "Ažurirajte obaveštenje?",

@@ -13,6 +13,7 @@ import multerConfig from '../config/multer';
 import authController from '../app/http/controllers/auth/AuthController';
 import examController from '../app/http/controllers/exam/ExamController';
 import gradeController from '../app/http/controllers/grade/GradeController';
+import DashboardController from '../app/http/controllers/dashboard/DashboardController';
 import { authMiddleware, professorOrAdminMiddleware } from '../app/http/middleware/auth';
 
 const apiRouter = new Router();
@@ -20,6 +21,8 @@ const apiRouter = new Router();
 apiRouter.get('/', (_: express.Request, response: express.Response) => {
 	response.json({ message: appConfig.appName });
 });
+
+apiRouter.middleware(authMiddleware).get('/dashboard', [DashboardController, 'index']);
 
 apiRouter.apiResource('/announcements', AnnouncementController, {
 	resolveIdAs: database.announcements,
