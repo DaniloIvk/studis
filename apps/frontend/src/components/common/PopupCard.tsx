@@ -1,4 +1,4 @@
-import type { PopupButtonProps, PopupCardProps } from '../../types/Button';
+import type { PopupCardProps } from '../../types/Button';
 import { concat, logData } from '../../common/helpers';
 import type { ThemeColor } from '../../types/Common';
 
