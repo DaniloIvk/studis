@@ -7,3 +7,11 @@ export type { Query } from './Query';
 export type Constructor<T> = new (...args: any[]) => T;
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+
+export type ThemeColor =
+	| 'success'
+	| 'warn'
+	| 'error'
+	| 'critical'
+	| 'primary'
+	| 'neutral';
