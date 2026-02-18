@@ -56,6 +56,17 @@
 			"exam_periods_description": "Upravljajte aktuelnim ispitnim rokovima"
 		}
 	},
+	"about": {
+		"title": "O Akademiji",
+		"subtitle": "Upoznajte tim i viziju koja stoji iza naše platforme.",
+		"mission_title": "Naša Misija",
+		"mission_description": "Pružiti studentima i profesorima modernu, brzu i pouzdanu platformu za upravljanje akademskim aktivnostima, prijavu ispita i razmenu materijala.",
+		"tech_stack_title": "Tehnologije",
+		"tech_stack_description": "Platforma je izgrađena sa ljubavlju koristeći najsavremenije web tehnologije uključujući React, Tailwind CSS, TypeScript i Node.js.",
+		"credits_title": "Priznanja i Licence",
+		"credits_description": "Sve ikone korišćene na platformi su preuzete iz Google Material Icons galerije i licencirane su pod CC BY 4.0 licencom.",
+		"copyright": "Akademija Aleksić. Sva prava zadržana."
+	},
 	"buttons": {
 		"create_user": "Dodajte korisnika",
 		"update_user": "Ažurirajte korisnika",
