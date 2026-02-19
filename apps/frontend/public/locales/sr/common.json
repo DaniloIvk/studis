@@ -157,26 +157,32 @@
 	},
 	"dashboard_page": {
 		"title": "Kontrolna tabla",
-		"subtitle": "Pregled vaših aktivnosti i statistike sistema.",
-		"loading": "Učitavanje kontrolne table...",
-		"welcome": "Dobrodošli nazad",
-		"logged_in_as": "Prijavljeni ste kao",
-		"role": "Uloga",
-		"tip": "Koristite bočni meni sa leve strane kako biste pristupili sistemu.",
-		"totalStudents": "Ukupno studenata",
-		"totalProfessors": "Ukupno profesora",
-		"totalCourses": "Ukupno predmeta",
-		"averageGrade": "Prosečna ocena",
-		"examPassRate": "Prolaznost ispita",
-		"myCourses": "Moji predmeti",
-		"studentsInMyCourses": "Studenata na mojim predmetima",
-		"upcomingExams": "Predstojeći ispiti",
-		"enrolledCourses": "Upisani predmeti",
-		"passedExams": "Položeni ispiti",
-		"pendingApplications": "Prijavljeni ispiti",
-		"chart_admin": "Raspodela ocena u sistemu",
-		"chart_professor": "Raspodela ocena na mojim predmetima",
-		"chart_student": "Moje ocene po predmetima"
+		"subtitle": "Pregled vaših akademskih aktivnosti i statistike na nivou institucije.",
+		"loading": "Učitavanje statistike...",
+		"active_period": "Trenutno je aktivan:",
+		"no_active_period": "Trenutno nema aktivnih ispitnih rokova.",
+		"admin": {
+			"totalStudents": "Ukupno studenata",
+			"totalProfessors": "Ukupno profesora",
+			"totalCourses": "Aktivni predmeti",
+			"averageGrade": "Prosečna ocena",
+			"examPassRate": "Prolaznost"
+		},
+		"professor": {
+			"myCourses": "Moji predmeti",
+			"studentsInMyCourses": "Upisanih studenata",
+			"averageGrade": "Prosečna ocena",
+			"upcomingExams": "Predstojeći ispiti"
+		},
+		"student": {
+			"enrolledCourses": "Upisani predmeti",
+			"passedExams": "Položeni ispiti",
+			"averageGrade": "Prosečna ocena",
+			"pendingApplications": "Prijavljeni ispiti"
+		},
+		"chart_admin": "Distribucija ocena na nivou akademije",
+		"chart_professor": "Distribucija ocena na vašim predmetima",
+		"chart_student": "Vaše ocene po predmetima"
 	},
 	"popups": {
 		"announcement": {

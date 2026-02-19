@@ -3,11 +3,14 @@ import app from '../config/app';
 
 export interface DashboardStats {
 	role: 'ADMIN' | 'PROFESSOR' | 'STUDENT';
+	activeExamPeriod: {
+		id: number;
+		name: string;
+		dateFrom: string;
+		dateTo: string;
+	} | null;
 	stats: Record<string, number>;
-	chart: {
-		labels: string[];
-		data: number[];
-	};
+	chart: { labels: string[]; data: number[] };
 }
 
 export interface DashboardResponse {
@@ -23,9 +26,7 @@ class DashboardService extends Service {
 			'GET',
 			undefined,
 			undefined,
-			{
-				Accept: 'application/json',
-			},
+			{ Accept: 'application/json' },
 		);
 
 		const data = await response.json();
