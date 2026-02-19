@@ -45,7 +45,9 @@ function MyProfile() {
 		await refreshUser();
 	};
 
-	if (!user) return null;
+	if (!user) {
+		return <></>;
+	}
 
 	return (
 		<div className='w-full h-full overflow-y-auto bg-light! dark:bg-dark! text-dark! dark:text-light! flex flex-col justify-center items-center content-stretch gap-8 transition-colors duration-500 py-12 px-6 lg:px-32'>
