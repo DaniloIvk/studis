@@ -41,7 +41,6 @@ function Dashboard() {
 	return (
 		<div className='w-full h-full p-6 md:p-8 overflow-y-auto bg-light! dark:bg-dark! transition-colors duration-300'>
 			<div className='max-w-6xl mx-auto flex flex-col gap-8'>
-				{/* Header */}
 				<div
 					className='flex items-center gap-4 animate-fade-in-left opacity-0'
 					style={{ animationFillMode: 'forwards' }}
@@ -59,7 +58,6 @@ function Dashboard() {
 					</div>
 				</div>
 
-				{/* Aktivan ispitni rok */}
 				<div
 					className='animate-fade-in-up opacity-0'
 					style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}
@@ -94,7 +92,6 @@ function Dashboard() {
 					}
 				</div>
 
-				{/* Statistika mapirana iz uloge */}
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
 					{data.role === 'ADMIN' && (
 						<>
@@ -203,7 +200,6 @@ function Dashboard() {
 					)}
 				</div>
 
-				{/* Grafikon */}
 				{data.chart.labels.length > 0 && (
 					<div
 						className='bg-light! dark:bg-darker! rounded-3xl border-2 border-b-[6px] border-light-gray! dark:border-dark p-6 shadow-sm animate-fade-in-up opacity-0'
